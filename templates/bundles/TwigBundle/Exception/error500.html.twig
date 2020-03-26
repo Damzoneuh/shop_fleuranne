@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ parent() }} Access denied{% endblock %}
+{% block javascripts %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="bg-grey-inherit">
+                    <div class="text-center">
+                        <h1 class="font-weight-bolder text-pink mt-5 mb-5 p-5">Oups ... </h1>
+                        <div class="mt-3 mb-3">
+                            <div class="text-pink">
+                                Une erreur est survenue lors du chargement de la page
+                            </div>
+                            <div class="text-pink">Si le problème persiste merci de nous contacter par le formulaire en pied de page .</div>
+                            <div class="text-center mt-2 mt-2 p-5">
+                                <a href="{{ path('index') }}" class="btn btn-group btn-pink">Retour au site </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
