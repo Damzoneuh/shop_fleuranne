@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -47,6 +49,23 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $resetToken;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Address", mappedBy="invoiceAddress")
+     */
+    private $invoiceAdress;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Address", mappedBy="deliveryAddress")
+     */
+    private $deliveryAddress;
+
+    public function __construct()
+    {
+        $this->invoiceAdress = new ArrayCollection();
+        $this->deliveryAddress = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -158,6 +177,68 @@ class User implements UserInterface
     public function setResetToken(?string $resetToken): self
     {
         $this->resetToken = $resetToken;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Address[]
+     */
+    public function getInvoiceAdress(): Collection
+    {
+        return $this->invoiceAdress;
+    }
+
+    public function addInvoiceAdress(Address $invoiceAdress): self
+    {
+        if (!$this->invoiceAdress->contains($invoiceAdress)) {
+            $this->invoiceAdress[] = $invoiceAdress;
+            $invoiceAdress->setInvoiceAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoiceAdress(Address $invoiceAdress): self
+    {
+        if ($this->invoiceAdress->contains($invoiceAdress)) {
+            $this->invoiceAdress->removeElement($invoiceAdress);
+            // set the owning side to null (unless already changed)
+            if ($invoiceAdress->getInvoiceAddress() === $this) {
+                $invoiceAdress->setInvoiceAddress(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Address[]
+     */
+    public function getDeliveryAddress(): Collection
+    {
+        return $this->deliveryAddress;
+    }
+
+    public function addDeliveryAddress(Address $deliveryAddress): self
+    {
+        if (!$this->deliveryAddress->contains($deliveryAddress)) {
+            $this->deliveryAddress[] = $deliveryAddress;
+            $deliveryAddress->setDeliveryAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDeliveryAddress(Address $deliveryAddress): self
+    {
+        if ($this->deliveryAddress->contains($deliveryAddress)) {
+            $this->deliveryAddress->removeElement($deliveryAddress);
+            // set the owning side to null (unless already changed)
+            if ($deliveryAddress->getDeliveryAddress() === $this) {
+                $deliveryAddress->setDeliveryAddress(null);
+            }
+        }
 
         return $this;
     }

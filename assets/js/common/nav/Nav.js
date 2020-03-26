@@ -35,6 +35,9 @@ export default class Nav extends Component{
                                 }
                             </a>
                         </li>
+                        <li className="nav-item">
+                            {el.dataset.user === "1" ? <a href="/parameters" title="paramètres" className="nav-link h4"><i className="fas fa-cogs text-grey"></i></a> : ''}
+                        </li>
                     </ul>
                 </div>
                 <a className="navbar-brand ml-3" href="/">

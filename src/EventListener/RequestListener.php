@@ -13,12 +13,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class RequestListener
 {
     private $urlGenerator;
-    private $flashbag;
+    private $flashBag;
 
     public function __construct(UrlGeneratorInterface $urlGenerator, FlashBagInterface $bag)
     {
         $this->urlGenerator = $urlGenerator;
-        $this->flashbag = $bag;
+        $this->flashBag = $bag;
     }
 
     public function onKernelRequest(RequestEvent $requestEvent){
@@ -28,7 +28,7 @@ class RequestListener
         /** @var User $user */
         if ($user = $requestEvent->getRequest()->getUser()){
             if (!$user->getIsValidated()){
-                $this->flashbag->add('error', 'Vous devez activer votre compte afin de continer la navigation');
+                $this->flashBag->add('error', 'Vous devez activer votre compte afin de continer la navigation');
                 return new RedirectResponse($this->urlGenerator->generate('index'));
             }
         }
