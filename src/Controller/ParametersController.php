@@ -139,4 +139,28 @@ class ParametersController extends AbstractController
 
         return $this->json(['success' => $message]);
     }
+
+    /**
+     * @return JsonResponse
+     * @Route("/api/newsletter", name="api_newsletter", methods={"PUT"})
+     */
+    public function setNewsLetter(){
+        $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = $this->getUser();
+        if (!$user){
+            throw new NotFoundHttpException();
+        }
+        if ($user->getNewsletter()){
+            $user->setNewsletter(false);
+            $em->flush();
+
+            return $this->json(['success' => 'La newsletter à bien été désactivée']);
+        }
+
+        $user->setNewsletter(true);
+        $em->flush();
+
+        return $this->json(['success' => 'La newsletter à bien été activée']);
+    }
 }
