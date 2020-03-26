@@ -87,5 +87,56 @@ class ParametersController extends AbstractController
         return $this->json(['success' => 'L\'adresse à bien été supprimée']);
     }
 
-    //TODO edit address
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @Route("/api/parameters/address/edit", name="api_parameters_address_edit", methods={"PUT"})
+     */
+    public function editAddress(Request $request){
+        $data = $this->serializer->decode($request->getContent(), 'json');
+        /** @var User $user */
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $address = $em->getRepository(Address::class)->find($data['id']);
+
+        $addressCreated = $this->setNewAddress($address, $user, $data, $data['addressType']);
+        $em->flush();
+
+        return $this->json(['success', 'L\'adresse à bien été modifiée']);
+    }
+
+    /**
+     * @param $type
+     * @param $id
+     * @return JsonResponse
+     * @Route("/api/parameters/address/settype", name="api_parameters_address_set_type", methods={"POST"})
+     */
+    public function addAddressType($type, $id){
+
+        $em = $this->getDoctrine()->getManager();
+        $address = $em->getRepository(Address::class)->find($id);
+        /** @var User $user */
+        $user = $this->getUser();
+        $message = null;
+
+        if ($type == 'invoice'){
+            $address->setInvoiceAddress($user);
+            $message = 'L\'adresse à bien été ajoutée en tant qu\'adresse de facturation';
+        }
+
+        if ($type == 'delivery'){
+            $address->setDeliveryAddress($user);
+            $message = 'L\'adresse à bien été ajoutée en tant qu\'adresse de livraison';
+        }
+
+        if ($type == 'both'){
+            $address->setDeliveryAddress($user);
+            $address->setInvoiceAddress($user);
+            $message = 'L\'adresse à bien été ajoutée en tant qu\'adresse de facturation et de livraison';
+        }
+
+        $em->flush();
+
+        return $this->json(['success' => $message]);
+    }
 }
