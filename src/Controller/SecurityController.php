@@ -245,4 +245,13 @@ class SecurityController extends AbstractController
 
         return $this->render('security/reset.html.twig', ['form' => $form->createView()]);
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @Route("/api/user", name="api_user", methods={"GET"})
+     */
+    public function getCurrentUser()
+    {
+        return $this->json($this->getUser());
+    }
 }
