@@ -12,7 +12,7 @@
 {% if is_granted('ROLE_ADMIN') %}
     <div class="w-100 bg-pink-inherit p-2 text-center"><a href="{{ path('admin') }}" class="text-grey">Admin</a></div>
 {% endif %}
-<div id="nav"></div>
+<div id="nav" {{ app.user ? 'data-user="1"' : 'data-user="0"' }}></div>
 {% for message in app.flashes('success') %}
     <div class="container-fluid mt-5">
         <div class="row mt-5">
