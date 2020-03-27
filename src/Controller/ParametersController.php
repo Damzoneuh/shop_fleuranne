@@ -148,9 +148,11 @@ class ParametersController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         /** @var User $user */
         $user = $this->getUser();
+
         if (!$user){
             throw new NotFoundHttpException();
         }
+
         if ($user->getNewsletter()){
             $user->setNewsletter(false);
             $em->flush();

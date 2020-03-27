@@ -299,6 +299,7 @@ class SecurityController extends AbstractController
      * @Route("/user/delete", name="user_delete")
      */
     public function deleteUser(){
+
         $em = $this->getDoctrine()->getManager();
         /** @var User $user */
         $user = $this->getUser();

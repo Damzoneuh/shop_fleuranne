@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Account from "./Account";
 import Loader from "../../common/loader/Loader";
+import Addresses from "./Addresses";
 
 export default class Parameters extends Component{
     constructor(props) {
@@ -67,9 +68,16 @@ export default class Parameters extends Component{
                 <div className="container-fluid">
                     <div className="row align-items-stretch">
                         <div className="col-md-6 col-sm-12">
-                            <div className="p-sm-2 p-5">
-                                <div className="bg-pink-inherit text-grey rounded shadow-lg">
+                            <div className="p-sm-2 p-5 h-100">
+                                <div className="bg-pink-inherit text-grey rounded shadow-lg h-100">
                                     <Account user={user} reloadUser={this.reloadUser} isLoaded={accountLoaded}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-6 col-sm-12">
+                            <div className="p-sm-2 p-5 h-100">
+                                <div className="bg-grey-inherit text-pink rounded shadow-lg h-100">
+                                    <Addresses user={user} reloadUser={this.reloadUser} isLoaded={accountLoaded}/>
                                 </div>
                             </div>
                         </div>

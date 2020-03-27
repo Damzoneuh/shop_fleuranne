@@ -26,6 +26,11 @@ class Img
      */
     private $path;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Item", inversedBy="img")
+     */
+    private $item;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Img
     public function setPath(string $path): self
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getItem(): ?Item
+    {
+        return $this->item;
+    }
+
+    public function setItem(?Item $item): self
+    {
+        $this->item = $item;
 
         return $this;
     }
