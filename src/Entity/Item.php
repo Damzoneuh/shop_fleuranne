@@ -28,10 +28,6 @@ class Item
      */
     private $price;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $desctiption;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -47,6 +43,11 @@ class Item
      * @ORM\OneToMany(targetEntity="App\Entity\Img", mappedBy="item")
      */
     private $img;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
     public function __construct()
     {
@@ -82,17 +83,7 @@ class Item
         return $this;
     }
 
-    public function getDesctiption(): ?string
-    {
-        return $this->desctiption;
-    }
 
-    public function setDesctiption(?string $desctiption): self
-    {
-        $this->desctiption = $desctiption;
-
-        return $this;
-    }
 
     public function getProm(): ?int
     {
@@ -145,6 +136,18 @@ class Item
                 $img->setItem(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
