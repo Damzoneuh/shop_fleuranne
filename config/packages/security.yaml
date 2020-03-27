@@ -39,3 +39,4 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/parameters, roles: ROLE_USER }
          - { path: ^/api/parameters, roles: ROLE_USER }
+         - { path: ^/api/user, roles: ROLE_USER }

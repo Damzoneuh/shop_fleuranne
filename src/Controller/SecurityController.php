@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class SecurityController extends AbstractController
 {
     use Mailer;
+    private $serializer;
+
+    public function __construct()
+    {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+
+        $this->serializer = new Serializer($normalizers, $encoders);
+    }
     /**
      * @Route("/login", name="app_login")
      * @param AuthenticationUtils $authenticationUtils
@@ -105,6 +119,7 @@ class SecurityController extends AbstractController
             $user->setResetToken($token);
             $user->setIsValidated(false);
             $user->setNewsletter($data['newsletter']);
+            $user->setIsDeleted(false);
 
             $mailer->send($this->createTemplatedMessage($user->getEmail(), 'account@fleuranne.fr', 'email/register.html.twig',
                 'Validation de votre compte sur Fleuranne.fr', [
@@ -188,7 +203,7 @@ class SecurityController extends AbstractController
                 ));
 
                 $this->addFlash('success', 'Afin de réinitialiser votre mot de passe un mail vous à été envoyé à l\'adresse : ' . $user->getEmail());
-                return $this->redirectToRoute('index');
+                return $this->redirectToRoute('app_logout');
             }
 
             $this->addFlash('error', 'L\'email que vous avez entré est introuvable');
@@ -244,5 +259,54 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/reset.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @return JsonResponse
+     * @Route("/api/user", name="api_user", methods={"GET"})
+     */
+    public function getCurrentUser()
+    {
+        return $this->json($this->getUser());
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws Exception
+     * @Route("/api/user/phone", name="api_user_phone", methods={"PUT"})
+     */
+    public function editPhone(Request $request){
+        $data = $this->serializer->decode($request->getContent(), 'json');
+        $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!$data['phone']){
+            $user->setPhone(null);
+            $em->flush();
+            return $this->json(['success' => 'Votre numéro de téléphone à bien été supprimé']);
+        }
+
+        $user->setPhone(intval($data['phone']));
+        $em->flush();
+
+        return $this->json(['success' => 'Votre numéro de téléphone à bien été mis à jour']);
+    }
+
+    /**
+     * @return RedirectResponse
+     * @Route("/user/delete", name="user_delete")
+     */
+    public function deleteUser(){
+
+        $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setIsDeleted(true);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre compte à bien été supprimé');
+        return $this->redirectToRoute('app_logout');
     }
 }
