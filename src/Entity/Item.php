@@ -49,6 +49,27 @@ class Item
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Mark")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $mark;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\CategoryChild", inversedBy="items")
+     */
+    private $categoryChild;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->img = new ArrayCollection();
@@ -148,6 +169,54 @@ class Item
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getMark(): ?Mark
+    {
+        return $this->mark;
+    }
+
+    public function setMark(?Mark $mark): self
+    {
+        $this->mark = $mark;
+
+        return $this;
+    }
+
+    public function getCategoryChild(): ?CategoryChild
+    {
+        return $this->categoryChild;
+    }
+
+    public function setCategoryChild(?CategoryChild $categoryChild): self
+    {
+        $this->categoryChild = $categoryChild;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

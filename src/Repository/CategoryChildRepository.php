@@ -19,6 +19,35 @@ class CategoryChildRepository extends ServiceEntityRepository
         parent::__construct($registry, CategoryChild::class);
     }
 
+    public function findOneSubCategory($id){
+        return $this->createQueryBuilder('sc')
+            ->where('sc.id=:id')
+            ->setParameter('id', $id)
+            ->orderBy('sc.id', 'ASC')
+            ->select(['sc.id', 'sc.name'])
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAllSubCategories(){
+        return $this->createQueryBuilder('sc')
+            ->select(['sc.id', 'sc.name'])
+            ->orderBy('sc.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getSubFromOneCategory($id){
+        return $this->createQueryBuilder('sc')
+            ->innerJoin('App\\Entity\\Category', 'c')
+            ->where('c.id =:id')
+            ->andWhere('sc.category = c.id')
+            ->setParameter('id', $id)
+            ->select(['sc.name', 'sc.id'])
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return CategoryChild[] Returns an array of CategoryChild objects
     //  */

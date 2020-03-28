@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,16 @@ class CategoryChild
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="child")
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Item", mappedBy="categoryChild")
+     */
+    private $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +63,37 @@ class CategoryChild
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Item[]
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(Item $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setCategoryChild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(Item $item): self
+    {
+        if ($this->items->contains($item)) {
+            $this->items->removeElement($item);
+            // set the owning side to null (unless already changed)
+            if ($item->getCategoryChild() === $this) {
+                $item->setCategoryChild(null);
+            }
+        }
 
         return $this;
     }
