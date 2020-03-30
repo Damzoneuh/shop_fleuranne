@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ItemRepository")
@@ -15,6 +17,8 @@ class Item
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("Item")
+     * @MaxDepth(4)
      */
     private $id;
 
@@ -57,6 +61,7 @@ class Item
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CategoryChild", inversedBy="items")
+     * @Groups("CategoryChild")
      */
     private $categoryChild;
 

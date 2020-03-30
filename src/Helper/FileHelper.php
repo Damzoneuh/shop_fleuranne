@@ -25,7 +25,7 @@ trait FileHelper
         return $img;
     }
 
-    public function moveFile(UploadedFile $file, $path, $fileName) : void{
+    public function moveFile(UploadedFile $file, $path, $fileName) : void {
         $file->move($path, $fileName);
     }
 

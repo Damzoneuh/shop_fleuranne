@@ -9,23 +9,8 @@ export default class Logger extends Component{
         }
     }
 
-    componentDidMount(){
-        this.setState({
-            type: this.props.type,
-            message: this.props.message
-        });
-        setTimeout(() => {this.componentWillUnmount()}, 2000)
-    }
-
-    componentWillUnmount(){
-       this.setState({
-           type: null,
-           message: null
-       })
-    }
-
     render() {
-        const {type, message} = this.state;
+        const {type, message} = this.props;
         if (type && message){
             return (
                 <div className={ "alert-" + type + " alert alert-dismissible fade show fixed-top w-75 mt-3 ml-2"} role="alert">

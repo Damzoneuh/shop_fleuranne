@@ -19,6 +19,22 @@ class ItemRepository extends ServiceEntityRepository
         parent::__construct($registry, Item::class);
     }
 
+    public function getItemsInProm(){
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.prom IS NOT NULL')
+            ->orderBy('i.updatedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function lastItems(){
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.createdAt', 'ASC')
+            ->where('i.prom IS NULL')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Item[] Returns an array of Item objects
     //  */
