@@ -42,10 +42,10 @@ export default class ItemTable extends Component{
         else {
             return (
                 <div>
-                    <h1 className="h4 text-pink text-center mb-4">Tableau de touts les produits</h1>
+                    <h1 className="h4 text-pink text-center mb-4">Tableau de tous les produits</h1>
                     <table className="table table-responsive-md table-striped bg-pink-inherit text-grey">
                         {message && type ? <Logger message={message} type={type}/> : ''}
-                        <thead >
+                        <thead>
                             <tr>
                                 <th scope="col">Nom</th>
                                 <th scope="col">Marque</th>

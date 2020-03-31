@@ -20,11 +20,13 @@ export default class AddItemForm extends Component{
             message: null,
             type: null
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.cancelCourse = this.cancelCourse.bind(this);
         this.hasToReload = this.hasToReload.bind(this);
         this.handleCatDropDown = this.handleCatDropDown.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     cancelCourse(){

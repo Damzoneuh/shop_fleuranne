@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -301,5 +302,14 @@ class ItemController extends AbstractController
             [],
             $this->context
         );
+    }
+
+    /**
+     * @param $id
+     * @return Response
+     * @Route("/product/{id}", name="product_show")
+     */
+    public function showProduct($id){
+        return $this->render('item/show.html.twig', ['item' => $this->getDoctrine()->getRepository(Item::class)->find($id)]);
     }
 }
