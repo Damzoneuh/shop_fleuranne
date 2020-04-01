@@ -4,6 +4,7 @@ import axios from 'axios';
 import Loader from "../../common/loader/Loader";
 import Carousel from 'react-bootstrap/Carousel'
 import divWithClassName from "react-bootstrap/cjs/divWithClassName";
+import CarouselCaption from "react-bootstrap/CarouselCaption";
 
 export default class Index extends Component{
     constructor(props) {
@@ -58,7 +59,10 @@ export default class Index extends Component{
                                     <Carousel.Item key={prom.id}>
                                         <h2 className="text-grey text-center mt-4">{prom.name}</h2>
                                         <div className="text-center ">
-                                            <img src={document.URL + 'img/' + prom.img[0].id} className=" d-block w-25 m-auto"/>
+                                            <img src={'https://' + window.location.hostname + '/img/' + prom.img[0].id} className=" d-block w-25 m-auto"/>
+                                            <div className="text-center mb-2">
+                                                <a href={'/product/' + prom.id} className="btn btn-grey btn-group">Voir plus</a>
+                                            </div>
                                             <div className="bg-pink p-3 d-flex align-items-center justify-content-center mb-4">
                                                 <span className="line-throw text-danger h4 d-block mb-0 p-2">{prom.price} €</span>
                                                 <span className="text-center text-info d-block mb-0 h4 p-2"> - {prom.prom} %</span>
@@ -81,11 +85,10 @@ export default class Index extends Component{
                             return (
                                 <div className="col-lg-3 col-md-6 col-sm-12 mb-2">
                                     <div className="card h-100">
-                                        <img src={document.URL + 'img/' + last.img[0].id} className="card-img-top mt-2 mb-2 m-auto" alt={last.img[0].name} />
+                                        <img src={'https://' + window.location.hostname + '/img/' + last.img[0].id} className="card-img-top mt-2 mb-2 m-auto" alt={last.img[0].name} />
                                         <div className="card-body bg-pink-inherit d-flex flex-column justify-content-around text-grey">
                                             <h3 className="card-title">{last.name}</h3>
-                                            <p className="card-text">{last.description}</p>
-                                            <a href="#" className="btn btn-grey">Voir plus</a>
+                                            <a href={'/product/' + last.id} className="btn btn-grey">Voir plus</a>
                                         </div>
                                     </div>
                                 </div>

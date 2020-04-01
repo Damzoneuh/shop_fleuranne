@@ -159,3 +159,21 @@ a:active button:active{
   border-radius: 0.5em;
   background-color: $grey !important;
 }
+
+.basket-icon{
+  padding: 1em;
+  z-index: 1000;
+  right: 1em;
+  top: 7em;
+}
+
+.badge-basket{
+  top: -0.2em;
+  left: -0.2em;
+  width: 20px;
+  height: 20px;
+}
+
+.navbar{
+  z-index: 1000;
+}

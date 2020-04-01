@@ -6,11 +6,31 @@ const el = document.getElementById('nav');
 export default class Nav extends Component{
     constructor(props) {
         super(props);
+        this.state = {
+            isScroll: false
+        };
 
+        this.handleScroll = this.handleScroll.bind(this);
+
+        window.addEventListener('scroll', this.handleScroll)
+    }
+
+    handleScroll(){
+        if (window.scrollY !== 0){
+            this.setState({
+                isScroll: true
+            })
+        }
+        else {
+            this.setState({
+                isScroll: false
+            })
+        }
     }
     render() {
+        const {isScroll} = this.state;
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-pink-inherit nav-border-grey shadow">
+            <nav className={!isScroll ? "navbar navbar-expand-lg navbar-light bg-pink-inherit nav-border-grey shadow" : "navbar navbar-expand-lg navbar-light bg-pink-inherit nav-border-grey shadow position-fixed w-100"}>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -40,10 +60,11 @@ export default class Nav extends Component{
                         </li>
                     </ul>
                 </div>
-                <a className="navbar-brand ml-3" href="/">
+                {!isScroll ?  <a className="navbar-brand ml-3" href="/">
                     <img src={logo} width="110"
                          className="d-inline-block align-top" alt="logo" />
-                </a>
+                </a> : ''}
+
             </nav>
         )
     }

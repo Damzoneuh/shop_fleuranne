@@ -9,12 +9,12 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" />
 </head>
 <body>
+<div id="nav" {{ app.user ? 'data-user="1"' : 'data-user="0"' }}></div>
 {% if app.user %}
     {% if is_granted('ROLE_ADMIN') %}
         <div class="w-100 bg-pink-inherit p-2 text-center"><a href="{{ path('admin') }}" class="text-grey">Admin</a></div>
     {% endif %}
 {% endif %}
-<div id="nav" {{ app.user ? 'data-user="1"' : 'data-user="0"' }}></div>
 <div id="basket" ></div>
 {% for message in app.flashes('success') %}
     <div class="container-fluid mt-5">
@@ -50,10 +50,8 @@
 {% endfor %}
 {% block body %}{% endblock %}
 <div id="footer"></div>
-{% block javascripts %}{{ encore_entry_script_tags('nav') }} {{ encore_entry_script_tags('footer') }}
-    {% if app.user %}
-        {{ encore_entry_script_tags('basket') }}
-    {% endif %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('nav') }} {{ encore_entry_script_tags('footer') }}{{ encore_entry_script_tags('basket') }}
 {% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
