@@ -32,6 +32,11 @@ export default class Index extends Component{
             })
     }
 
+    getPriceWithProm(price, prom){
+        let newPrice = price - (prom * price / 100);
+        return newPrice.toFixed(2);
+    }
+
 
     render() {
         const {isLoaded, lasts, proms} = this.state;
@@ -64,9 +69,9 @@ export default class Index extends Component{
                                                 <a href={'/product/' + prom.id} className="btn btn-grey btn-group">Voir plus</a>
                                             </div>
                                             <div className="bg-pink p-3 d-flex align-items-center justify-content-center mb-4">
-                                                <span className="line-throw text-danger h4 d-block mb-0 p-2">{prom.price} €</span>
+                                                <span className="line-throw text-danger h4 d-block mb-0 p-2">{prom.price.toFixed(2)} €</span>
                                                 <span className="text-center text-info d-block mb-0 h4 p-2"> - {prom.prom} %</span>
-                                                <span className="text-center text-grey d-block h3 mb-0 p-2">{prom.price - prom.price/100 * prom.prom} €</span>
+                                                <span className="text-center text-grey d-block h3 mb-0 p-2">{this.getPriceWithProm(prom.price, prom.prom)} €</span>
                                             </div>
                                         </div>
                                     </Carousel.Item>
