@@ -43,6 +43,14 @@ a:active button:active{
   background-color: rgba(131,129,144, 0.8);
 }
 
+.bg-pink{
+  background-color: $pink;
+}
+
+.bg-grey{
+  background-color: $grey;
+}
+
 .nav-border-grey{
   border-bottom: 1px solid $grey;
 }
@@ -132,3 +140,40 @@ a:active button:active{
   text-shadow: 2px 0 10px black;
 }
 
+.active-pink{
+  font-family: "Quick-bold", sans-serif;
+}
+
+.line-throw{
+  text-decoration: line-through !important;
+}
+
+.carousel-control-next-icon{
+  padding: 1rem;
+  border-radius: 0.5em;
+  background-color: $grey !important;
+}
+
+.carousel-control-prev-icon{
+  padding: 1rem;
+  border-radius: 0.5em;
+  background-color: $grey !important;
+}
+
+.basket-icon{
+  padding: 1em;
+  z-index: 1000;
+  right: 1em;
+  top: 7em;
+}
+
+.badge-basket{
+  top: -0.2em;
+  left: -0.2em;
+  width: 20px;
+  height: 20px;
+}
+
+.navbar{
+  z-index: 1000;
+}

@@ -27,6 +27,11 @@ Encore
     .addEntry('global', './assets/sass/global.scss')
     .addEntry('footer', './assets/js/common/footer/Footer.js')
     .addEntry('parameters', './assets/js/modules/parameters/Parameters.js')
+    .addEntry('admin', './assets/js/modules/admin/Admin.js')
+    .addEntry('admin-shop', './assets/js/modules/admin/Shop.js')
+    .addEntry('index', './assets/js/modules/index/Index.js')
+    .addEntry('item', './assets/js/modules/item/Show.js')
+    .addEntry('basket', './assets/js/common/basket/Basket.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
