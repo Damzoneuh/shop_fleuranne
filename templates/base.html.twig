@@ -94,7 +94,7 @@
     function decreaseItem(item){
         let data = JSON.parse(sessionStorage.getItem('basket'));
         if (data[item]){
-            const check = new Promise(resolve => checkQuantity(resolve, item, data));
+            const check = new Promise(resolve => resolve(checkQuantity(item, data)));
             check.then(res => {
                 data = res;
                 sessionStorage.setItem('basket', JSON.stringify(data));
@@ -110,13 +110,16 @@
         }
     }
 
-    function checkQuantity(resolve, item, data){
+    function checkQuantity(item, data){
         if (data[item].quantity === 1){
+            //console.log(item);
             data[item] = null;
-            resolve(data);
+            return data;
         }
         else {
-           resolve(data[item].quantity = data[item].quantity - 1);
+            let quantity = data[item].quantity;
+            data[item].quantity = quantity - 1;
+            return data;
         }
     }
 </script>
