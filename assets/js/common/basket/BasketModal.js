@@ -59,21 +59,42 @@ export default class BasketModal extends Component{
     render() {
         const {isLoaded, fullItems} = this.state;
         const {items} = this.props;
-        return (
-            <div className="modal fade" id="basketModal" tabIndex="-1" role="dialog"
-                 aria-labelledby="basketModal" aria-hidden="true">
-                <div className="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="basketModalTitle">Mon panier</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        if (!isLoaded){
+            return (
+                <div className="modal fade" id="basketModal" tabIndex="-1" role="dialog"
+                     aria-labelledby="basketModal" aria-hidden="true">
+                    <div className="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="basketModalTitle">Mon panier</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <Loader/>
+                            </div>
                         </div>
-                        <div className="modal-body">
-                            {!isLoaded ? <Loader/> : ''}
-                            <table className="table table-responsive-md table-striped ">
-                                <thead>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="modal fade" id="basketModal" tabIndex="-1" role="dialog"
+                     aria-labelledby="basketModal" aria-hidden="true">
+                    <div className="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="basketModalTitle">Mon panier</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close" >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                {!isLoaded ? <Loader/> : ''}
+                                <table className="table table-responsive-md table-striped ">
+                                    <thead>
                                     <tr className="h5 text-grey">
                                         <th scope="col">
                                             Produit
@@ -88,40 +109,39 @@ export default class BasketModal extends Component{
                                             Prix total
                                         </th>
                                     </tr>
-                                </thead>
-                                <tbody>
-                            {fullItems && isLoaded && fullItems.length > 0 ?
-                                    fullItems.map(item => {
-                                        return(
-                                            <tr className="text-grey">
-                                                <td>
-                                                    <img src={'https://' + window.location.hostname + '/img/' + item.img[0].id} style={{width: '50px'}} className="img-thumbnail m-1"/>
-                                                </td>
-                                                <td >
-                                                    {item.name}
-                                                </td>
-                                                <td >
-                                                    {items[item.id].quantity}
-                                                </td>
-                                                <td >
-                                                    {item.price * items[item.id].quantity}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                : 'Votre panier est vide'}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="button" className="btn btn-primary">Valider mon panier</button>
+                                    </thead>
+                                    <tbody>
+                                    {fullItems && isLoaded && fullItems.length > 0 ?
+                                        fullItems.map(item => {
+                                            return(
+                                                <tr className="text-grey">
+                                                    <td>
+                                                        <img src={'https://' + window.location.hostname + '/img/' + item.img[0].id} style={{width: '50px'}} className="img-thumbnail m-1"/>
+                                                    </td>
+                                                    <td>
+                                                        {item.name}
+                                                    </td>
+                                                    <td >
+                                                        {items && typeof items[item.id] !== 'undefined' && items[item.id] ? items[item.id].quantity : ''}
+                                                    </td>
+                                                    <td >
+                                                        {items && typeof items[item.id] !== 'undefined' && items[item.id] ? item.price * items[item.id].quantity : ''}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                        : 'Votre panier est vide'}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="button" className="btn btn-primary">Accéder à mon panier</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
-
-
 }
