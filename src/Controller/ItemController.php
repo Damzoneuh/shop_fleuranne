@@ -312,4 +312,16 @@ class ItemController extends AbstractController
     public function showProduct($id){
         return $this->render('item/show.html.twig', ['item' => $this->getDoctrine()->getRepository(Item::class)->find($id)]);
     }
+
+    /**
+     * @param $id
+     * @return Response
+     * @Route("/product/category/{id}", name="product_category")
+     */
+    public function sortItemsByCat($id){
+        return $this->render('item/sort-items-cat.html.twig', [
+            'id' => $id,
+            'cat' => $this->getDoctrine()->getRepository(CategoryChild::class)->find($id)
+        ]);
+    }
 }

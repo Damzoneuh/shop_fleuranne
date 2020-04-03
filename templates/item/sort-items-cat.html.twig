@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} {{ cat.name }}{% endblock %}
+{% block javascripts %}{{ parent() }} {{ encore_entry_script_tags('showByCat') }}{% endblock %}
+{% block body %}
+    <div id="show-by-cat" data-id="{{ id }}"></div>
+{% endblock %}
