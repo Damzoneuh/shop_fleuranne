@@ -40,3 +40,4 @@ security:
          - { path: ^/parameters, roles: ROLE_USER }
          - { path: ^/api/parameters, roles: ROLE_USER }
          - { path: ^/api/user, roles: ROLE_USER }
+         - { path: ^/basket, roles: ROLE_USER }

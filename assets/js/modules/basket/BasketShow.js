@@ -19,6 +19,7 @@ export default class BasketShow extends Component{
         this.handleDelete = this.handleDelete.bind(this);
         this.handleIncrease = this.handleIncrease.bind(this);
         this.clearPayload = this.clearPayload.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -108,7 +109,10 @@ export default class BasketShow extends Component{
 
     handleSubmit(e){
         e.preventDefault();
-        window.location.href = '/basket/validate'
+        axios.post('/api/basket/session', JSON.parse(e.target.payload.value))
+            .then(res => {
+                window.location.href = '/basket/validation';
+            })
     }
 
     calculateProm(item){
@@ -190,6 +194,7 @@ export default class BasketShow extends Component{
                                         </div>
                                     </div>
                                     <form className="form p-2" onSubmit={this.handleSubmit}>
+                                        <input type="hidden" value={JSON.stringify(payload)} name="payload"/>
                                         <div className="form-group form-check text-center">
                                             <input className="form-check-input" name="cgu" id="cgu" required={true} type="checkbox"/>
                                             <label htmlFor="cgv">En cochant cette case vous acceptez les <a href="/cgv">conditions générale de vente</a> et renoncez à votre délais de rétractation de 7 jours </label>
