@@ -2,17 +2,31 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import logo from '../../../img/logo.png';
 const el = document.getElementById('nav');
+import axios from 'axios';
 
 export default class Nav extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            isScroll: false
+            isScroll: false,
+            links: null
         };
-
         this.handleScroll = this.handleScroll.bind(this);
-
         window.addEventListener('scroll', this.handleScroll)
+    }
+
+    componentDidMount(){
+       axios.get('/api/category')
+           .then(res => {
+               this.setState({
+                   links: res.data
+               })
+           })
+    }
+
+
+    componentWillUnmount(){
+        window.removeEventListener('scroll', this.handleScroll)
     }
 
     handleScroll(){
@@ -27,8 +41,10 @@ export default class Nav extends Component{
             })
         }
     }
+
+
     render() {
-        const {isScroll} = this.state;
+        const {isScroll, links} = this.state;
         return (
             <nav className={!isScroll ? "navbar navbar-expand-lg navbar-light bg-pink-inherit nav-border-grey shadow" : "navbar navbar-expand-lg navbar-light bg-pink-inherit nav-border-grey shadow position-fixed w-100"}>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -41,6 +57,28 @@ export default class Nav extends Component{
                         <li className="nav-item">
                             <a className="nav-link h4 text-grey" href="/">Accueil</a>
                         </li>
+                        {links && links.length > 0 ?
+                               links.map(link => {
+                                  return (
+                                      <li className="nav-item dropdown">
+                                          <a className="nav-link dropdown-toggle h4 text-grey" href="#" id={'navbarDropdown-' + link.id}
+                                             role="button" data-toggle="dropdown" aria-haspopup="true"
+                                             aria-expanded="false">
+                                              {link.name}
+                                          </a>
+                                          <div className="dropdown-menu bg-pink text-grey" aria-labelledby={'navbarDropdown-' + link.id}>
+                                              {link.child && link.child.length > 0 ?
+                                                  link.child.map(sub => {
+                                                      return (
+                                                          <a className="dropdown-item text-grey" href={'/product/category/' + sub.id}>{sub.name}</a>
+                                                      )
+                                                  })
+                                                  : ''}
+                                          </div>
+                                      </li>
+                                  )
+                               })
+                            : ''}
                         <li className="nav-item">
                             <a className="nav-link h4 text-grey" href="#contact">Contact</a>
                         </li>
