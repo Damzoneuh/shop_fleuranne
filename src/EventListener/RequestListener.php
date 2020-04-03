@@ -28,7 +28,7 @@ class RequestListener
         /** @var User $user */
         if ($user = $requestEvent->getRequest()->getUser()){
             if (!$user->getIsValidated()){
-                $this->flashBag->add('error', 'Vous devez activer votre compte afin de continer la navigation');
+                $this->flashBag->add('error', 'Vous devez activer votre compte afin de continuer la navigation');
                 return new RedirectResponse($this->urlGenerator->generate('index'));
             }
         }
