@@ -9,7 +9,9 @@ export default class BasketShow extends Component{
         this.state = {
             items: null,
             isLoaded: false,
-            payload: null
+            payload: null,
+            shippingFees: null,
+            totalPrice: null
         };
         this.getItems = this.getItems.bind(this);
         this.getItemsDetails = this.getItemsDetails.bind(this);
@@ -20,10 +22,10 @@ export default class BasketShow extends Component{
     }
 
     componentDidMount(){
-        this.getItems();
+       this.getItems();
     }
 
-    getItems(){
+    getItems(values){
        this.setState({
            isLoaded: false
        });
@@ -37,8 +39,8 @@ export default class BasketShow extends Component{
             details.then(res => {
                 this.setState({
                     isLoaded: true
-                })
-            })
+                });
+            });
         });
     }
 
@@ -131,6 +133,7 @@ export default class BasketShow extends Component{
             )
         }
         else {
+            let total = 0;
             return (
                 <div className="container-fluid">
                     <div className="row">
@@ -149,6 +152,7 @@ export default class BasketShow extends Component{
                                         </thead>
                                         <tbody>
                                         {payload.map(item => {
+                                            total = total + this.calculateProm(item.item) * item.qty;
                                             return(
                                                 <tr className="text-center text-pink h5">
                                                     <th scope="row">
@@ -165,7 +169,7 @@ export default class BasketShow extends Component{
                                                         </div>
                                                     </td>
                                                     <td className="vertical-align-center">
-                                                        {this.calculateProm(item.item)} €
+                                                        {this.calculateProm(item.item) * item.qty} €
                                                     </td>
                                                     <td className="vertical-align-center">
                                                         <i className="fas fa-trash text-danger link" onClick={() => this.handleDelete(item.item.id)}></i>
@@ -175,7 +179,16 @@ export default class BasketShow extends Component{
                                         })}
                                         </tbody>
                                     </table>
-                                    {/* TODO calculate total price */}
+                                    <div className="d-flex justify-content-around align-items-center p-2">
+                                        <div className="text-center">
+                                            <h1 className="h4 text-pink">Frais de port</h1>
+                                            <h1 className="h4 text-info">{total > 75 ? 'offert' : 5.95 + ' €'}</h1>
+                                        </div>
+                                        <div className="text-center">
+                                            <h1 className="h4 text-pink">Prix total</h1>
+                                            <h1 className="h4 text-info">{total < 75 ? total + 5.95 : total} €</h1>
+                                        </div>
+                                    </div>
                                     <form className="form p-2" onSubmit={this.handleSubmit}>
                                         <div className="form-group form-check text-center">
                                             <input className="form-check-input" name="cgu" id="cgu" required={true} type="checkbox"/>
