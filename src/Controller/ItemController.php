@@ -202,9 +202,9 @@ class ItemController extends AbstractController
      */
     public function getCategories($id = null){
         if ($id){
-            return $this->json($this->getDoctrine()->getRepository(Category::class)->findOneCategory($id));
+            return $this->json($this->getDoctrine()->getRepository(Category::class)->find($id), 200 , [], $this->context);
         }
-        return $this->json($this->getDoctrine()->getRepository(Category::class)->getCategories());
+        return $this->json($this->getDoctrine()->getRepository(Category::class)->findAll(), 200 , [], $this->context);
     }
 
     /**
