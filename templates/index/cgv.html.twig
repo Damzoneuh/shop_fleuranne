@@ -1,0 +1,200 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} CGV{% endblock %}
+{% block javascripts %}{{ parent() }}{% endblock %}
+{% block body %}
+    <div class="container-fluid text-grey">
+        <div class="row mt-5 mb-5">
+            <div class="col-12">
+                <h1 class="text-center text-grey">Conditions génrales de vente</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Les présentes conditions de vente sont conclues d’une part par la société Institut de Beauté Fleuranne au
+                capital social de 5000€ dont le siège social est situé à 5, rue du Pré de la danse 74940 Annecy le Vieux
+
+                immatriculée au Registre du Commerce et des Sociétés de Annecy (74) sous le numéro 753437672 ci-
+                après dénommée "Institut de beauté Fleuranne" et gérant le site fleuranne.fr et, d’autre part, par toute
+
+                personne physique ou morale souhaitant procéder à un achat via le site internet {{ app.request.baseUrl }}
+                dénommée ci-après " l’acheteur ".
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 1. Objet</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Les présentes conditions de vente visent à définir les relations contractuelles entre Institut de beauté
+                Fleuranne et l’acheteur et les conditions applicables à tout achat effectué par le biais du site internet
+                {{ app.request.baseUrl }} . L’acquisition d’un produit à travers le présent site implique une acceptation sans
+                réserve par l’acheteur des présentes conditions de vente dont l’acheteur reconnaît avoir pris connaissance
+                préalablement à sa commande. Avant toute transaction, l’acheteur déclare d’une part que l’achat de
+                produits sur le site {{ app.request.baseUrl }} est sans rapport direct avec son activité professionnelle et est limité
+                à une utilisation strictement personnelle et d’autre part avoir la pleine capacité juridique, lui permettant de
+                s’engager au titre des présentes conditions générales de ventes.
+                La société Institut de beauté Fleuranne conserve la possibilité de modifier à tout moment ces conditions
+                de ventes, afin de respecter toute nouvelle réglementation ou dans le but d'améliorer l’utilisation de son
+                site. De ce fait, les conditions applicables seront celles en vigueur à la date de la commande par
+                l’acheteur.
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 2. Produits</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Les produits proposés sont ceux qui figurent sur le site {{ app.request.baseUrl }} de la société Institut de beauté
+                Fleuranne dans la limite des stocks disponibles. La société Institut de beauté Fleuranne se réserve le droit
+                de modifier à tout moment l’assortiment de produits. Chaque produit est présenté sur le site internet sous
+                forme d’un descriptif reprenant ses principales caractéristiques techniques (contenance, utilisation,
+                composition...). Les photographies sont les plus fidèles possibles mais n’engagent en rien le Vendeur. La
+                vente des produits présentés dans le site {{ app.request.baseUrl }} est destinée à tous les acheteurs résidants dans
+                en France, Suisse et Belgique qui autorisent pleinement l’entrée sur leur territoire de ces produits.
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 3. Tarifs</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Les prix figurant sur les fiches produits du catalogue internet et sont des prix en Euros (€) toutes taxes
+                comprises (TTC) tenant compte de la TVA applicable au jour de la commande. Tout changement du taux
+                de la TVA pourra être répercuté sur le prix des produits. La société Institut de beauté Fleuranne se réserve
+                le droit de modifier ses prix à tout moment, étant toutefois entendu que le prix figurant au catalogue le
+
+                jour de la commande sera le seul applicable à l’acheteur. Les prix indiqués ne comprennent pas les frais
+                de livraison, facturés en supplément du prix des produits achetés suivant le montant total de la commande.
+                En France métropolitaine, pour toute commande supérieure ou égale à 75 euros TTC, les frais de port sont
+                offerts ; pour toute commande inférieure à 75 euros TTC, un forfait de participation aux frais d’expédition
+                sera facturé à l’acheteur d'un montant de 5,95 euros TTC.
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 4. Commande et modalités de paiement</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Avant toute commande, l’acheteur doit créer un compte sur le site {{ app.request.baseUrl }}. La rubrique de
+                création de compte est accessible directement depuis la barre de menu latérale. A chaque visite,
+                l’acheteur, s’il souhaite commander ou consulter son compte (état des commandes, profil...), devra
+                s’identifier à l’aide de ces informations. La société Institut de beauté Fleuranne propose à l’acheteur de
+                commander et régler ses produits en plusieurs étapes, avec 1 options de paiement au choix :
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                - Paiement sécurisé par carte bancaire : l’acheteur sélectionne les produits qu’il souhaite commander
+                dans le « panier », modifie si besoin (quantités, références...), vérifie l’adresse de livraison ou en
+                renseigne une nouvelle. Puis, les frais de port sont calculés et soumis à l’acheteur, ainsi que le nom du
+                transporteur. Ensuite, l’acheteur choisit le mode de paiement : « Paiement par CB». L’étape suivante lui
+                propose de vérifier l’ensemble des informations, prendre connaissance et accepter les présentes conditions
+                générales de vente en cochant la case correspondante, puis l’invite à valider sa commande en cliquant sur
+                le bouton « Confirmer ma commande ». Enfin, l’acheteur est redirigé sur l’interface sécurisée Banque
+                Populaire afin de renseigner en toute sécurité ses références de compte de carte bleue personnelle. Si le
+                paiement est accepté, la commande est enregistrée et le contrat définitivement formé. Le paiement par
+                carte bancaire est irrévocable. En cas d’utilisation frauduleuse de celle-ci, l’acheteur pourra exiger
+                l’annulation du paiement par carte, les sommes versées seront alors recréditées ou restituées. La
+                responsabilité du titulaire d’une carte bancaire n’est pas engagée si le paiement contesté a été prouvé
+                effectué frauduleusement, à distance, sans utilisation physique de sa carte. Pour obtenir le remboursement
+                du débit frauduleux et des éventuels frais bancaires que l’opération a pu engendrer, le porteur de la carte
+                doit contester, par écrit, le prélèvement auprès de sa banque, dans les 70 jours suivant l’opération, voire
+                120 jours si le contrat le liant à celle-ci le prévoit. Les montants prélevés sont remboursés par la banque
+                dans un délai maximum d’un mois après réception de la contestation écrite formée par le porteur. Aucun
+                frais de restitution des sommes ne pourra être mis à la charge du titulaire.
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                La confirmation d’une commande entraîne acceptation des présentes conditions de vente, la
+                reconnaissance d’en avoir parfaite connaissance et la renonciation à se prévaloir de ses propres conditions
+                d’achat. L’ensemble des données fournies et la confirmation enregistrée vaudront preuve de la
+                transaction. Si l’acheteur possède une adresse électronique et s’il l’a renseignée sur son bon de
+                commande, la société Institut de beauté Fleuranne lui communiquera par courrier électronique la
+                confirmation de l’enregistrement de sa commande.
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Si l’acheteur souhaite contacter la société Institut de beauté Fleuranne il peut le faire soit par courrier à
+                l’adresse suivante : 5, rue du Pré de la danse 74940 Annecy le Vieux; soit par email à l’adresse suivante :
+                fleuranne@bbox.fr soit par téléphone au 04.50.09.84.26
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 5. Réserve de propriété</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                La société Institut de beauté Fleuranne conserve la propriété pleine et entière des produits vendus jusqu'au
+                parfait encaissement du prix, en principal, frais et taxes compris.
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 6. Rétractation</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                En vertu de l’article L121-20 du Code de la consommation, l’acheteur dispose d'un délai de quatorze
+                jours ouvrables à compter de la livraison de leur commande pour exercer son droit de rétractation et ainsi
+                faire retour du produit au vendeur pour échange ou remboursement sans pénalité, à l’exception des frais
+                de retour.
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 7. Livraison</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Les livraisons sont faites à l’adresse indiquée sur le bon de commande qui ne peut être que dans la zone
+                géographique convenue. Les commandes sont effectuées par La Poste via COLISSIMO, service de
+                livraison avec suivi, remise sans signature. Les délais de livraison ne sont donnés qu’à titre indicatif ; si
+                ceux-ci dépassent trente jours à compter de la commande, le contrat de vente pourra être résilié et
+                l’acheteur remboursé. La société Institut de beauté Fleuanne pourra fournir par e-mail à l’acheteur le
+                numéro de suivi de son colis. L’acheteur est livré à son domicile par son facteur. En cas d’absence de
+                l’acheteur, il recevra un avis de passage de son facteur, ce qui lui permet de retirer les produits
+                commandés au bureau de Poste le plus proche, pendant un délai indiqué par les services postaux. Les
+                risques liés au transport sont à la charge de l'acquéreur à compter du moment où les articles quittent les
+                locaux de la société Institut de beauté Fleuranne. L’acheteur est tenu de vérifier en présence du préposé de
+                La Poste ou du livreur, l’état de l’emballage de la marchandise et son contenu à la livraison. En cas de
+                dommage pendant le transport, toute protestation doit être effectuée auprès du transporteur dans un délai
+                de trois jours à compter de la livraison.
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 8. Garantie</h1>
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                Tous les produits fournis par la société Institut de beauté Fleuranne bénéficient de la garantie légale
+                prévue par les articles 1641 et suivants du Code civil. En cas de non conformité d’un produit vendu, il
+                pourra être retourné à la société Institut de beauté Fleuranne qui le reprendra, l’échangera ou le
+                remboursera. Toutes les réclamations, demandes d’échange ou de remboursement doivent s’effectuer par
+                voie postale à l’adresse suivante : Institut de beauté fleuranne 5 rue du pré de la danse 74940 Annecy le vieux , dans un délai de trente jours après
+                livraison.
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 9. Responsabilité</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                La société Institut de beauté Fleuranne dans le processus de vente à distance, n’est tenue que par une
+                obligation de moyens. Sa responsabilité ne pourra être engagée pour un dommage résultant de l’utilisation
+                du réseau Internet tel que perte de données, intrusion, virus, rupture du service, ou autres problèmes
+                involontaires.
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 10. Propriété intellectuelle</h1>
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                Tous les éléments du site {{ app.request.baseUrl }} sont et restent la propriété intellectuelle et exclusive de la
+                société Institut de beauté Fleuranne Personne n’est autorisé à reproduire, exploiter, ou utiliser à quelque
+                titre que ce soit, même partiellement, des éléments du site qu’ils soient sous forme de photo, logo, visuel
+                ou texte.
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 11. Données à caractère personnel</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                La société Institut de beauté Fleuranne s'engage à préserver la confidentialité des informations fournies
+                par l’acheteur, qu'il serait amené à transmettre pour l'utilisation de certains services. Toute information le
+                concernant est soumise aux dispositions de la loi n° 78-17 du 6 janvier 1978. A ce titre, l'internaute
+                dispose d'un droit d'accès, de modification et de suppression des informations le concernant. Il peut en
+                faire la demande à tout moment par mail à l’adresse suivante : fleuranne@bbox.fr
+            </div>
+
+            <div class="col-12 mt-2 mb-2">
+                <h1 class="text-center text-grey">Article 12. Règlement des litiges</h1>
+            </div>
+            <div class="col-12 mt-2 mb-2">
+                Les présentes conditions de vente à distance sont soumises à la loi française. Pour tous litiges
+                ou contentieux, le Tribunal compétent sera celui de Annecy Haute-Savoie.
+            </div>
+        </div>
+    </div>
+{% endblock %}

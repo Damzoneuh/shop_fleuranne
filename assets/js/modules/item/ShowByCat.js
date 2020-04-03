@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Loader from "../../common/loader/Loader";
 const el = document.getElementById('show-by-cat');
+
 export default class ShowByCat extends Component{
     constructor(props) {
         super(props);
