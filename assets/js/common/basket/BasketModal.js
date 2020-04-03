@@ -136,7 +136,7 @@ export default class BasketModal extends Component{
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                <button type="button" className="btn btn-primary">Accéder à mon panier</button>
+                                <a className="btn btn-primary" href="/basket">Accéder à mon panier</a>
                             </div>
                         </div>
                     </div>

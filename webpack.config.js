@@ -32,6 +32,7 @@ Encore
     .addEntry('index', './assets/js/modules/index/Index.js')
     .addEntry('item', './assets/js/modules/item/Show.js')
     .addEntry('basket', './assets/js/common/basket/Basket.js')
+    .addEntry('basket-show', './assets/js/modules/basket/BasketShow.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
