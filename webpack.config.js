@@ -35,6 +35,7 @@ Encore
     .addEntry('basket-show', './assets/js/modules/basket/BasketShow.js')
     .addEntry('showByCat', './assets/js/modules/item/ShowByCat.js')
     .addEntry('cookie', './assets/js/common/cookies/Cookie.js')
+    .addEntry('basket-validation', './assets/js/modules/basket/BasketValidation.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
