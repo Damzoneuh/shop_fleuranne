@@ -202,7 +202,7 @@ export default class BasketShow extends Component{
                                             <label htmlFor="cgv">En cochant cette case vous acceptez les <a href="/cgv">conditions générale de vente</a> et renoncez à votre délais de rétractation de 7 jours </label>
                                         </div>
                                         <div className="text-center mt-2">
-                                            <button className="btn btn-group btn-grey">Valider mon panier</button>
+                                            <a href="/basket/validation" title="Valider mon panier" className="btn btn-group btn-grey">Valider mon panier</a>
                                         </div>
                                     </form>
                                 </div>

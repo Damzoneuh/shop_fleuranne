@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,6 @@ class BasketController extends AbstractController
      * @Route("/basket/validation", name="basket_validation")
      */
     public function validateBasket(Session $session){
-        return $this->render('basket/confirm.html.twig', ['items' => $session->get('basket')]);
+        return $this->render('basket/confirm.html.twig');
     }
 }

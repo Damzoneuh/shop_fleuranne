@@ -125,7 +125,7 @@ export default class BasketModal extends Component{
                                                         {items && typeof items[item.id] !== 'undefined' && items[item.id] ? items[item.id].quantity : ''}
                                                     </td>
                                                     <td >
-                                                        {items && typeof items[item.id] !== 'undefined' && items[item.id] ? item.price * items[item.id].quantity : ''}
+                                                        {items && typeof items[item.id] !== 'undefined' && items[item.id] ? item.price * items[item.id].quantity : ''} €
                                                     </td>
                                                 </tr>
                                             )
