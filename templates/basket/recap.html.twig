@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Récapitulatif de commande{% endblock %}
+{% block javascripts %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    <form action="https://paiement.systempay.fr/vads-payment/" method="post">
+        {% for input in payload|keys %}
+            <input type="hidden" name="{{ input }}" value="{{ payload[input] }}">
+        {% endfor %}
+        <button class="btn btn-grey btn-group">Payer</button>
+    </form>
+{% endblock %}

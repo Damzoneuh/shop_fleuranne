@@ -22,7 +22,6 @@ trait SerializerHelper
     }
 
     public function decode($content, $format): array {
-        dump($this->serializer); die();
         return $this->serializer->decode($content, $format);
     }
 }

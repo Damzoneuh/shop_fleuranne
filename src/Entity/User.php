@@ -70,10 +70,16 @@ class User implements UserInterface
      */
     private $isDeleted;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Invoice", mappedBy="buyer")
+     */
+    private $invoices;
+
     public function __construct()
     {
         $this->invoiceAdress = new ArrayCollection();
         $this->deliveryAddress = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
     }
 
 
@@ -273,6 +279,37 @@ class User implements UserInterface
     public function setIsDeleted(bool $isDeleted): self
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Invoice[]
+     */
+    public function getInvoices(): Collection
+    {
+        return $this->invoices;
+    }
+
+    public function addInvoice(Invoice $invoice): self
+    {
+        if (!$this->invoices->contains($invoice)) {
+            $this->invoices[] = $invoice;
+            $invoice->setBuyer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoice(Invoice $invoice): self
+    {
+        if ($this->invoices->contains($invoice)) {
+            $this->invoices->removeElement($invoice);
+            // set the owning side to null (unless already changed)
+            if ($invoice->getBuyer() === $this) {
+                $invoice->setBuyer(null);
+            }
+        }
 
         return $this;
     }

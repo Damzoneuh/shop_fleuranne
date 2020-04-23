@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -19,9 +20,17 @@ class ParametersController extends AbstractController
 {
     use AddressHelper;
     private $serializer;
+    private $context;
 
     public function __construct()
     {
+
+        $this->context = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object;
+            },
+        ];
+
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
@@ -173,7 +182,7 @@ class ParametersController extends AbstractController
     public function getInvoiceAddresses(){
         /** @var User $user */
         $user = $this->getUser();
-        return $this->json($user->getInvoiceAdress()->count() > 0 ? $user->getInvoiceAdress()->getValues() : []);
+        return $this->json($user->getInvoiceAdress()->count() > 0 ? $user->getInvoiceAdress()->getValues() : [], 200 ,[], $this->context);
     }
 
     /**
@@ -183,6 +192,6 @@ class ParametersController extends AbstractController
     public function getDeliveryAddress(){
         /** @var User $user */
         $user = $this->getUser();
-        return $this->json($user->getDeliveryAddress()->count() > 0 ? $user->getDeliveryAddress()->getValues() : []);
+        return $this->json($user->getDeliveryAddress()->count() > 0 ? $user->getDeliveryAddress()->getValues() : [], 200 ,[], $this->context);
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\TmpOrder;
 use App\Entity\User;
+use App\Services\PaymentService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,5 +63,45 @@ class BasketController extends AbstractController
      */
     public function validateBasket(Session $session){
         return $this->render('basket/confirm.html.twig');
+    }
+
+    /**
+     * @param Session $session
+     * @param Request $request
+     * @return JsonResponse
+     * @Route("/api/basket/session/command", name="api_basket_session_command", methods={"POST"})
+     */
+    public function setSessionForCommand(Session $session, Request $request){
+        $data = $this->serializer->decode($request->getContent(), 'json');
+        $session->set('command', $data);
+        return $this->json(['success' => 'session set']);
+    }
+
+    /**
+     * @param Session $session
+     * @param PaymentService $service
+     * @param Request $request
+     * @return Response
+     * @throws Exception
+     * @Route("/basket/recap", name="basket_recap")
+     */
+    public function basketRecap(Session $session, PaymentService $service, Request $request){
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $command = $session->get('command');
+        $em = $this->getDoctrine()->getManager();
+        $tmp = new TmpOrder();
+        $tmp->setContent($this->serializer->encode($command, 'json'));
+
+        $em->persist($tmp);
+        $em->flush();
+
+        $payload = $service->createPaymentPayload($user , 20, 'https://' . $request->getHost(), $tmp->getId());
+
+        return $this->render('basket/recap.html.twig', [
+            'command' => $command,
+            'payload' => $payload
+        ]);
     }
 }
