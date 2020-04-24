@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -40,7 +41,7 @@ class AdminController extends AbstractController
      * @param $id
      * @return Response
      * @Route("/admin/order/{id}", name="admin_get_order")
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws TransportExceptionInterface
      */
     public function getOrder(Request $request, MailerInterface $mailer, $id){
         /** @var Command $order */
@@ -65,7 +66,7 @@ class AdminController extends AbstractController
 
             $mailer->send($nextStep['message']);
 
-            return $this->redirectToRoute('admin_shop');
+            return $this->redirectToRoute('admin_get_order', ['id' => $id]);
         }
 
         return $this->render('admin/order.html.twig', ['order' => $order, 'form' => $form->createView()]);

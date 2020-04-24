@@ -7,17 +7,19 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col mt-4 mb-4">
-            <div class="p-2 bg-pink-inherit text-grey">
+            <div class="p-2 bg-grey-inherit text-pink">
                 <div class="text-center">
                     <h1>Commande : {{ order.invoice.payment.transactionUuid }}</h1>
+                    <h2>Mode d'envoi : {{ order.mode == 1 ? 'Collissimo' : 'Récuperé sur place' }}</h2>
                 </div>
-                <table class="table table-striped mt-2 mb-2">
+                <table class="table table-striped mt-2 mb-2 text-pink">
                     <thead>
                         <tr>
                             <th scope="col">Nom</th>
                             <th scope="col">Référence</th>
                             <th scope="col">Quantité</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,13 +31,13 @@
                                {% if order.status == 'En attente' %}
                                    <td class="text-warning">{{ order.status }}</td>
                                {% endif %}
-                               {% if order.status == 'En cours de traitement' %}
-                                   <td class="text-info">{{ order.status }}</td>
+                               {% if order.status == 'En cours de préparation' %}
+                                   <td class="text-warning">{{ order.status }}</td>
                                {% endif %}
-                               {% if order.status == 'Prête' or order.status == 'Expédiée' %}
+                               {% if order.status == 'Prête' or order.status == 'Expédié' %}
                                    <td class="text-success">{{ order.status }}</td>
                                {% endif %}
-                               {% if order.status != 'Prête' and order.status != 'Expédiée' %}
+                               {% if order.status != 'Prête' and order.status != 'Expédié' %}
                                    <td>
                                        {{ form_start(form) }}
                                        {{ form_end(form) }}
