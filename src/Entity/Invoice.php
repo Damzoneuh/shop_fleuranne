@@ -99,5 +99,4 @@ class Invoice
 
         return $this;
     }
-
 }

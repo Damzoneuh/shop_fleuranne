@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Commande{% endblock %}
+{% block javascripts %}{{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col mt-4 mb-4">
+            <div class="p-2 bg-pink-inherit text-grey">
+                <div class="text-center">
+                    <h1>Commande : {{ order.invoice.payment.transactionUuid }}</h1>
+                </div>
+                <table class="table table-striped mt-2 mb-2">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Référence</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% for item in order.invoice.line.values %}
+                           <tr>
+                               <th>{{ item.name }}</th>
+                               <td>{{ item.ref }}</td>
+                               <td>{{ item.quantity }}</td>
+                               {% if order.status == 'En attente' %}
+                                   <td class="text-warning">{{ order.status }}</td>
+                               {% endif %}
+                               {% if order.status == 'En cours de traitement' %}
+                                   <td class="text-info">{{ order.status }}</td>
+                               {% endif %}
+                               {% if order.status == 'Prête' or order.status == 'Expédiée' %}
+                                   <td class="text-success">{{ order.status }}</td>
+                               {% endif %}
+                               {% if order.status != 'Prête' and order.status != 'Expédiée' %}
+                                   <td>
+                                       {{ form_start(form) }}
+                                       {{ form_end(form) }}
+                                   </td>
+                               {% endif %}
+                           </tr>
+                       {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

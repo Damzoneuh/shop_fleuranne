@@ -4,10 +4,45 @@
 {% block javascripts %}{{ parent() }}{% endblock %}
 
 {% block body %}
-    <form action="https://paiement.systempay.fr/vads-payment/" method="post">
-        {% for input in payload|keys %}
-            <input type="hidden" name="{{ input }}" value="{{ payload[input] }}">
-        {% endfor %}
-        <button class="btn btn-grey btn-group">Payer</button>
-    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center text-grey mt-4 mb-4">
+                    <h1 class="h5">Mode de livraison : {{ command.mode == 2 ? 'Retrait sur place ' : 'Collissimo'}}</h1>
+                </div>
+                <table class="table table-striped bg-grey text-pink">
+                    {% for item in command.items %}
+                        <tr>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.qty }}</td>
+                            <td class="text-right">{{ item.price|number_format(2) }} €</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Frais de port</td>
+                        <td></td>
+                        <td class="text-right">{{ command.port }} €</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td class="text-right">{{ command.total|number_format(2) }} €</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-12 text-center mb-5">
+                <form action="https://paiement.systempay.fr/vads-payment/" method="post">
+                    {% for input in payload|keys %}
+                        <input type="hidden" name="{{ input }}" value="{{ payload[input] }}">
+                    {% endfor %}
+                    <button class="btn btn-grey btn-group">Payer {{ command.total|number_format(2) }} €</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

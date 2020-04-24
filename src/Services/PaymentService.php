@@ -109,6 +109,7 @@ class PaymentService
         $invoiceLine->setProm($item->getProm());
         $invoiceLine->setRef($item->getRef());
         $invoiceLine->setInvoice($invoice);
+        $invoiceLine->setQuantity($quantity);
         return $invoiceLine;
     }
 
@@ -116,5 +117,47 @@ class PaymentService
         $invoice->setBuyer($user);
         $invoice->setPayment($payment);
         return $invoice;
+    }
+
+    public function createTotalPayload(array $payload){
+        $returnedArray = [];
+        $itemArray = [];
+        $totalPrice = 0;
+        $products = $payload['products'];
+        foreach ($products as $product){
+            $price = self::applyPromAndQuantity($product['item']['price'], $product['qty'], $product['item']['prom']);
+            array_push($itemArray, [
+                'name' => $product['item']['name'],
+                'prom' => $product['item']['prom'] ? $product['item']['prom'] : null,
+                'qty' => $product['qty'],
+                'price' => $price
+            ]);
+            $returnedArray['items'] = $itemArray;
+            $totalPrice += $price;
+        }
+        $returnedArray['total'] = $totalPrice;
+        $returnedArray['port'] = self::getPortPrice($totalPrice, $payload['deliveryMode']);
+        $returnedArray['mode'] = $payload['deliveryMode'] == "1" ? 1 : 2;
+
+        return $returnedArray;
+    }
+
+    private static function applyPromAndQuantity($price, $quantity, $prom = null){
+        if (!$prom){
+            return $price * $quantity;
+        }
+        $promotedValue = round($price / $prom , 2);
+        $promotedPrice = $price - $promotedValue;
+        return $promotedPrice * $quantity;
+    }
+
+    private static function getPortPrice($totalPrice, $mode){
+        if ($totalPrice > 75){
+            return 0;
+        }
+        if ($mode == "1" && $totalPrice < 75){
+            return 5.95;
+        }
+        return 0;
     }
 }

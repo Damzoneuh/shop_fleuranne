@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,37 @@ class Command
      * @ORM\Column(type="string", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $message;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Item")
+     */
+    private $products;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $mode;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $deliveryAddress;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $invoiceAddress;
+
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +85,80 @@ class Command
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Item[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Item $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Item $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
+        }
+
+        return $this;
+    }
+
+    public function getMode(): ?int
+    {
+        return $this->mode;
+    }
+
+    public function setMode(int $mode): self
+    {
+        $this->mode = $mode;
+
+        return $this;
+    }
+
+    public function getDeliveryAddress(): ?int
+    {
+        return $this->deliveryAddress;
+    }
+
+    public function setDeliveryAddress(int $deliveryAddress): self
+    {
+        $this->deliveryAddress = $deliveryAddress;
+
+        return $this;
+    }
+
+    public function getInvoiceAddress(): ?int
+    {
+        return $this->invoiceAddress;
+    }
+
+    public function setInvoiceAddress(int $invoiceAddress): self
+    {
+        $this->invoiceAddress = $invoiceAddress;
 
         return $this;
     }

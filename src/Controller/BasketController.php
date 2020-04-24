@@ -97,10 +97,12 @@ class BasketController extends AbstractController
         $em->persist($tmp);
         $em->flush();
 
-        $payload = $service->createPaymentPayload($user , 20, 'https://' . $request->getHost(), $tmp->getId());
+        $recap = $service->createTotalPayload($command);
+
+        $payload = $service->createPaymentPayload($user , $recap['total'], 'https://' . $request->getHost(), $tmp->getId());
 
         return $this->render('basket/recap.html.twig', [
-            'command' => $command,
+            'command' => $recap,
             'payload' => $payload
         ]);
     }
