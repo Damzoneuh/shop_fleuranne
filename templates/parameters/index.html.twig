@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent()}} Paramètres{% endblock %}
+
+{% block javascripts %}{{ parent() }} {{ encore_entry_script_tags('parameters') }}{% endblock %}
+{% block body %}
+<div id="parameters"></div>
+{% endblock %}

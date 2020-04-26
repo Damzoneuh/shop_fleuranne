@@ -1,0 +1,187 @@
+@import "~bootstrap/scss/bootstrap";
+$pink-inherit: rgba(251,222,193, 0.8);
+$grey-inherit: rgba(131,129,144, 0.8);
+$grey: rgb(131,129,144);
+$grey-dark: rgb(100,110, 100);
+$pink: rgb(251,222,193);
+
+@font-face {
+  src: url("../font/Quicksand_Book.otf");
+  font-family: 'Quick-book';
+}
+
+@font-face {
+  src: url("../font/Quicksand_Bold.otf");
+  font-family: 'Quick-bold';
+}
+
+body{
+  font-family: "Quick-book", sans-serif;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6{
+  font-family: "Quick-bold", sans-serif !important;
+}
+
+a button{
+  outline: none;
+}
+
+a:active button:active{
+  outline: none;
+}
+
+.link{
+  cursor: pointer;
+}
+
+.bg-pink-inherit{
+  background-color: $pink-inherit;
+}
+
+.bg-grey-inherit{
+  background-color: rgba(131,129,144, 0.8);
+}
+
+.bg-pink{
+  background-color: $pink;
+}
+
+.bg-grey{
+  background-color: $grey;
+}
+
+.nav-border-grey{
+  border-bottom: 1px solid $grey;
+}
+
+.footer-border-grey{
+  border-top: 1px solid $grey;
+}
+
+.text-pink{
+  color: $pink !important;
+}
+
+.text-grey{
+  color: $grey !important;
+}
+
+.btn-grey{
+  background-color: $grey ;
+  border-radius: 0.5rem;
+  border: 1px solid $grey-dark;
+  color: $pink;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-grey:hover{
+  background-color: $grey-inherit;
+  color: $pink;
+}
+
+.btn-grey:active{
+  background-color: $pink;
+  color: $grey;
+}
+
+@media screen and (max-width: 550px){
+  .layout-banner{
+    height: 30vh !important;
+  }
+}
+@media screen and (min-width: 551px) and (max-width: 850px){
+  .layout-banner{
+    min-height: 60vh !important;
+  }
+}
+@media screen and (min-width: 851px){
+  .layout-banner{
+    min-height: 75vh !important;
+  }
+}
+
+.banner-text{
+  position: relative;
+  margin-top: 1rem !important;
+}
+
+
+.btn-pink{
+  background-color: $pink;
+  border-radius: 0.5rem;
+  border: 1px solid $pink-inherit;
+  color: $grey;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-pink:hover{
+  background-color: $pink-inherit;
+  color: $grey;
+}
+
+.btn-pink:active{
+  background-color: $grey;
+  color: $pink;
+}
+
+.border-pink{
+  border: 1px solid $pink;
+}
+
+.layout-table-banner{
+  height: 30vh !important;
+  background-repeat: no-repeat !important;
+}
+
+.text-shadow{
+  text-shadow: 2px 0 10px black;
+}
+
+.active-pink{
+  font-family: "Quick-bold", sans-serif;
+}
+
+.line-throw{
+  text-decoration: line-through !important;
+}
+
+.carousel-control-next-icon{
+  padding: 1rem;
+  border-radius: 0.5em;
+  background-color: $grey !important;
+}
+
+.carousel-control-prev-icon{
+  padding: 1rem;
+  border-radius: 0.5em;
+  background-color: $grey !important;
+}
+
+.basket-icon{
+  padding: 1em;
+  z-index: 1000;
+  right: 1em;
+  top: 7em;
+}
+
+.badge-basket{
+  top: -0.2em;
+  left: -0.2em;
+  width: 20px;
+  height: 20px;
+}
+
+.navbar{
+  z-index: 1000;
+}
+
+.img-basket {
+  width: 100px;
+}
+
+.vertical-align-center{
+  vertical-align: middle !important;
+}

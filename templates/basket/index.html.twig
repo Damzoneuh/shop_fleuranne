@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Panier{% endblock %}
+{% block javascripts %}{{ parent() }} {{ encore_entry_script_tags('basket-show') }}{% endblock %}
+{% block body %}
+<div id="basket-show"></div>
+{% endblock %}

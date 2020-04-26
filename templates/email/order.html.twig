@@ -1,0 +1,17 @@
+{% extends 'email/layer.html.twig' %}
+
+{% block body %}
+    <div style="text-align: center">
+        {{ content }}
+    </div>
+    <div style="text-align: center; margin-top: 1rem">
+        <a href="{{ absolute_url(path('admin_get_order', {id: uuid})) }}" style="background-color: rgb(131,129,144) ;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(131,129,144);
+  color: rgb(251,222,193);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+">Aller a la commande</a>
+    </div>
+{% endblock %}
