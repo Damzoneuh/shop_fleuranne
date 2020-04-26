@@ -192,7 +192,7 @@ export default class BasketShow extends Component{
                                         </div>
                                         <div className="text-center">
                                             <h1 className="h4 text-pink">Prix total</h1>
-                                            <h1 className="h4 text-info">{total < 75 ? total + 5.95 : total.toFixed(2)} €</h1>
+                                            <h1 className="h4 text-info">{total < 75 ? total + 5.95 : total} €</h1>
                                         </div>
                                     </div>
                                     <form className="form p-2" onSubmit={this.handleSubmit}>

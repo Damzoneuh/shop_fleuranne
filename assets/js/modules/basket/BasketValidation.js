@@ -63,8 +63,10 @@ export default class BasketValidation extends Component{
     }
 
     calculatePrice(item){
-        let total = item.item.price * item.qty;
-        return total.toFixed(2);
+        if (item.item.prom){
+            return this.calculateProm(item.item) * item.qty;
+        }
+        return item.item.price * item.qty;
     }
 
     handleToggleAddress(){
@@ -151,6 +153,16 @@ export default class BasketValidation extends Component{
                 })
         }
     }
+
+    calculateProm(item){
+        console.log(item)
+        if (item.prom){
+            let price = item.price - item.price * item.prom /100;
+            return price.toFixed(2)
+        }
+        return item.price.toFixed(2)
+    }
+
 
     render() {
         const {isLoaded, invoiceAddress, deliveryAddress, addAddress, products, invoiceSelected, deliverySelected, message, type} = this.state;

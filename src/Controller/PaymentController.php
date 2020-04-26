@@ -84,7 +84,6 @@ class PaymentController extends AbstractController
            $item = $em->getRepository(Item::class)->find($ordered['item']['id']);
            $itemLine = $paymentService->createInvoiceLines($item, new InvoiceLine(), $invoice, $ordered['qty']);
            $em->persist($itemLine);
-           $command->addProduct($item);
        }
 
        $em->persist($command);

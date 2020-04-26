@@ -9,6 +9,11 @@
         <div class="col-12 mt-4 mb-4">
             <div class="p-2 bg-grey-inherit text-pink">
                 <div class="text-center">
+                    <div class="text-center mt-5 mb-5">
+                        <a href="{{ path('admin_shop') }}" class="btn btn-group btn-grey">
+                            Retour à l'admin
+                        </a>
+                    </div>
                     <h1>Commande : {{ order.invoice.payment.transactionUuid }}</h1>
                     <h2 class="mt-3 mb-3">Mode d'envoi : {{ order.mode == 1 ? 'Collissimo' : 'Récuperé sur place' }}</h2>
                     <h3 class="mt-3 mb-3">Status :

@@ -27,10 +27,6 @@ export default class Addresses extends Component{
                             return (
                                 <tr>
                                     <td>{invoice.number} {invoice.street} {invoice.city}</td>
-                                    <td className="text-right">
-                                        <a className="text-danger"><i className="fas fa-trash"></i></a>
-                                        {/*    TODO on click delete  */}
-                                    </td>
                                 </tr>
                             )
                         }) : ''}
@@ -43,10 +39,6 @@ export default class Addresses extends Component{
                             return (
                                 <tr>
                                     <td>{delivery.number} {delivery.street} {delivery.city}</td>
-                                    <td className="text-right">
-                                        <a className="text-danger"><i className="fas fa-trash"></i></a>
-                                    {/*    TODO on click delete  */}
-                                    </td>
                                 </tr>
                             )
                         }) : ''}

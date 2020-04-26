@@ -138,6 +138,9 @@ export default class Account extends Component{
                                 <a className="btn btn-group btn-grey text-pink" onClick={this.handleEdit}>Editer mes informations</a>
                                 <a className="btn btn-group btn-danger text-white" onClick={this.handleDeleteModal}>Supprimer mon compte</a>
                             </div>
+                            <div className="mt-5 text-center">
+                                <a href="/parameters/order" className="btn btn-group btn-success">Voir mes commandes</a>
+                            </div>
                         </div>
                         : ''
                     }

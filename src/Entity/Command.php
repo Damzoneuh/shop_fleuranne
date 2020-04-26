@@ -35,11 +35,6 @@ class Command
     private $message;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Item")
-     */
-    private $products;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $mode;
@@ -54,11 +49,6 @@ class Command
      */
     private $invoiceAddress;
 
-
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -101,31 +91,6 @@ class Command
         return $this;
     }
 
-    /**
-     * @return Collection|Item[]
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Item $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Item $product): self
-    {
-        if ($this->products->contains($product)) {
-            $this->products->removeElement($product);
-        }
-
-        return $this;
-    }
 
     public function getMode(): ?int
     {

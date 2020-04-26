@@ -4,10 +4,10 @@
 namespace App\Services;
 
 
+use App\Entity\Command;
 use App\Entity\Invoice;
 use App\Entity\InvoiceLine;
 use App\Entity\Item;
-use App\Entity\Order;
 use App\Entity\Payment;
 use App\Entity\User;
 use App\Helper\PaymentHelper;
@@ -44,7 +44,7 @@ class PaymentService
 
     private function createOrderId(){
         try{
-            $order = $this->em->getRepository(Order::class)->findOneBy([], ['id' => 'DESC']);
+            $order = $this->em->getRepository(Command::class)->findOneBy([], ['id' => 'DESC']);
         }catch (Exception $e){
             return 1;
         }
@@ -135,8 +135,8 @@ class PaymentService
             $returnedArray['items'] = $itemArray;
             $totalPrice += $price;
         }
-        $returnedArray['total'] = $totalPrice;
         $returnedArray['port'] = self::getPortPrice($totalPrice, $payload['deliveryMode']);
+        $returnedArray['total'] = $returnedArray['port'] == 0 ? $totalPrice : $totalPrice + $returnedArray['port'];
         $returnedArray['mode'] = $payload['deliveryMode'] == "1" ? 1 : 2;
 
         return $returnedArray;
@@ -152,12 +152,9 @@ class PaymentService
     }
 
     private static function getPortPrice($totalPrice, $mode){
-        if ($totalPrice > 75){
+        if ($totalPrice > 75 || intval($mode) != 1){
             return 0;
         }
-        if ($mode == "1" && $totalPrice < 75){
-            return 5.95;
-        }
-        return 0;
+        return 5.95;
     }
 }

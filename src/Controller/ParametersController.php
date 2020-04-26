@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Command;
+use App\Entity\Invoice;
 use App\Entity\User;
 use App\Helper\AddressHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -193,5 +197,51 @@ class ParametersController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         return $this->json($user->getDeliveryAddress()->count() > 0 ? $user->getDeliveryAddress()->getValues() : [], 200 ,[], $this->context);
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     * @Route("/api/address/{id}", name="api_address", methods={"GET"})
+     */
+    public function getAddress($id){
+        if ($this->isGranted('ROLE_ADMIN')){
+            return $this->json($this->getDoctrine()->getRepository(Address::class)->find($id), 200, [], $this->context);
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+        /** @var Address $address */
+        $address = $this->getDoctrine()->getRepository(Address::class)->find($id);
+        if ($user->getId() == $address->getInvoiceAddress()->getId() || $user->getId() == $address->getDeliveryAddress()->getId()) {
+            return $this->json($address, 200, [], $this->context);
+        }
+
+        throw new AccessDeniedException();
+    }
+
+    /**
+     * @param null $id
+     * @return Response
+     * @Route("/parameters/order/{id}", name="parameters_order")
+     */
+    public function getOrders($id = null){
+        if ($id){
+            //TODO render the vue
+        }
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $invoices = $user->getInvoices();
+        $orders = [];
+        if ($invoices->count() > 0){
+            foreach ($invoices->getValues() as $invoice){
+                /** @var Invoice $invoice */
+                $order = $this->getDoctrine()->getRepository(Command::class)->findOneBy(['invoice' => $invoice->getId()]);
+                array_push($orders, $order);
+            }
+        }
+
+        return $this->render('parameters/orders.html.twig', ['orders' => $orders]);
     }
 }

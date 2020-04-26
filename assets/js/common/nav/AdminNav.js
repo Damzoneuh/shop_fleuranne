@@ -23,8 +23,8 @@ export default class AdminNav extends Component{
                 </button>
 
                 <div className="collapse navbar-collapse" id="AdminNavbar">
-                    <div className="row">
-                        <div className="col">
+                    <div className="row w-100">
+                        <div className="col-lg-4 col-md-12">
                             <h1 className="text-pink h4 mt-2 mb-2 border-bottom">Gestion des produits</h1>
                             <ul className="navbar-nav mr-auto flex-column">
                                 <li className="nav-item">
@@ -41,6 +41,17 @@ export default class AdminNav extends Component{
                                 </li>
                                 <li className="nav-item">
                                     <a className={tab === 1 && subTab === 5 ? 'nav-link text-pink active-pink link' : 'nav-link text-pink link'} onClick={() => this.changeTab(1,5)}>Créer une sous categorie</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="col-lg-4 col-md-12">
+                            <h1 className="text-pink h4 mt-2 mb-2 border-bottom">Gestion des transactions</h1>
+                            <ul className="navbar-nav mr-auto flex-column">
+                                <li className="nav-item">
+                                    <a className={tab === 2 && subTab === 1 ? 'nav-link text-pink active-pink link' : 'nav-link text-pink link'}  onClick={() => this.changeTab(2,1)}>Voir les factures</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className={tab === 2 && subTab === 2 ? 'nav-link text-pink active-pink link' : 'nav-link text-pink link'}  onClick={() => this.changeTab(2,2)}>Voir les Commandes</a>
                                 </li>
                             </ul>
                         </div>

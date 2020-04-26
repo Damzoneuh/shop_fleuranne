@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import AdminNav from "../../common/nav/AdminNav";
 import ItemHandler from "./handleItems/ItemHandler";
+import Invoice from "./handleInvoices/Invoice";
 
 export default class Shop extends Component{
     constructor(props) {
@@ -36,6 +37,14 @@ export default class Shop extends Component{
                     <ItemHandler subTab={subTab} />
                 </div>
 
+            )
+        }
+        if (tab === 2){
+            return (
+                <div>
+                    <AdminNav tab={tab} subTab={subTab} handleTab={this.handleTab} handleSubTab={this.handleSubTab}/>
+                    <Invoice subTab={subTab} />
+                </div>
             )
         }
     }
