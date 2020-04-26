@@ -156,6 +156,8 @@ export default class BasketShow extends Component{
                                         </thead>
                                         <tbody>
                                         {payload.map(item => {
+                                            let price = 0;
+                                            price = this.calculateProm(item.item) * item.qty;
                                             total = total + this.calculateProm(item.item) * item.qty;
                                             return(
                                                 <tr className="text-center text-pink h5">
@@ -173,7 +175,7 @@ export default class BasketShow extends Component{
                                                         </div>
                                                     </td>
                                                     <td className="vertical-align-center">
-                                                        {this.calculateProm(item.item) * item.qty} €
+                                                        {price.toFixed(2)} €
                                                     </td>
                                                     <td className="vertical-align-center">
                                                         <i className="fas fa-trash text-danger link" onClick={() => this.handleDelete(item.item.id)}></i>
@@ -190,7 +192,7 @@ export default class BasketShow extends Component{
                                         </div>
                                         <div className="text-center">
                                             <h1 className="h4 text-pink">Prix total</h1>
-                                            <h1 className="h4 text-info">{total < 75 ? total + 5.95 : total} €</h1>
+                                            <h1 className="h4 text-info">{total < 75 ? total + 5.95 : total.toFixed(2)} €</h1>
                                         </div>
                                     </div>
                                     <form className="form p-2" onSubmit={this.handleSubmit}>
@@ -200,7 +202,7 @@ export default class BasketShow extends Component{
                                             <label htmlFor="cgv">En cochant cette case vous acceptez les <a href="/cgv">conditions générale de vente</a> et renoncez à votre délais de rétractation de 7 jours </label>
                                         </div>
                                         <div className="text-center mt-2">
-                                            <button className="btn btn-group btn-grey">Valider mon panier</button>
+                                            <button title="Valider mon panier" className="btn btn-group btn-grey">Valider mon panier</button>
                                         </div>
                                     </form>
                                 </div>

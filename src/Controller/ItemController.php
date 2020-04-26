@@ -94,7 +94,7 @@ class ItemController extends AbstractController
         $this->moveFile($file, $path, $filename);
         $subCat = $this->getDoctrine()->getRepository(CategoryChild::class)->find($request->get('categoryChild'));
         $mark = $this->getDoctrine()->getRepository(Mark::class)->find($request->get('mark'));
-       //dump($this->decode($request->get('payload'), 'json')); die();
+
 
         $item = $this->createItemPayload(
             new Item(),

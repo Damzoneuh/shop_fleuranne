@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://kit.fontawesome.com/a499f7b8cf.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" />
+    <script>
+        function removeBasket() {
+            sessionStorage.removeItem('basket');
+        }
+    </script>
 </head>
 <body>
 <div id="nav" {{ app.user ? 'data-user="1"' : 'data-user="0"' }}></div>
@@ -113,7 +118,6 @@
 
     function checkQuantity(item, data){
         if (data[item].quantity === 1){
-            //console.log(item);
             data[item] = null;
             return data;
         }

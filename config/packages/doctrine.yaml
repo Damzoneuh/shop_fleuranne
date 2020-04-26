@@ -3,9 +3,9 @@ doctrine:
     driver: 'pdo_mysql'
     server_version: 'mariadb-10.3.14'
     charset: utf8mb4
-    default_table_options:
-      charset: utf8mb4
-      collate: utf8mb4_unicode_ci
+#    default_table_options:
+#      charset: utf8mb4
+#      collate: utf8mb4_unicode_ci
     dbname: '%env(DB_NAME)%'
     host: '%env(DB_HOST)%'
     port: '%env(DB_PORT)%'

@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -19,9 +20,17 @@ class ParametersController extends AbstractController
 {
     use AddressHelper;
     private $serializer;
+    private $context;
 
     public function __construct()
     {
+
+        $this->context = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object;
+            },
+        ];
+
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
@@ -109,7 +118,7 @@ class ParametersController extends AbstractController
      * @param $type
      * @param $id
      * @return JsonResponse
-     * @Route("/api/parameters/address/settype", name="api_parameters_address_set_type", methods={"POST"})
+     * @Route("/api/parameters/address/settype/{type}/{id}", name="api_parameters_address_set_type", methods={"POST"})
      */
     public function addAddressType($type, $id){
 
@@ -164,5 +173,25 @@ class ParametersController extends AbstractController
         $em->flush();
 
         return $this->json(['success' => 'La newsletter à bien été activée']);
+    }
+
+    /**
+     * @return JsonResponse
+     * @Route("/api/address/invoice", name="api_invoice_address", methods={"GET"})
+     */
+    public function getInvoiceAddresses(){
+        /** @var User $user */
+        $user = $this->getUser();
+        return $this->json($user->getInvoiceAdress()->count() > 0 ? $user->getInvoiceAdress()->getValues() : [], 200 ,[], $this->context);
+    }
+
+    /**
+     * @return JsonResponse
+     * @Route("/api/address/delivery", name="api_delivery_address", methods={"GET"})
+     */
+    public function getDeliveryAddress(){
+        /** @var User $user */
+        $user = $this->getUser();
+        return $this->json($user->getDeliveryAddress()->count() > 0 ? $user->getDeliveryAddress()->getValues() : [], 200 ,[], $this->context);
     }
 }

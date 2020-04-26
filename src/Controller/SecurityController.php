@@ -22,16 +22,24 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 class SecurityController extends AbstractController
 {
     use Mailer;
+    private $context;
     private $serializer;
-
     public function __construct()
     {
+        $this->context = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object;
+            },
+        ];
+
+
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
 
@@ -267,7 +275,7 @@ class SecurityController extends AbstractController
      */
     public function getCurrentUser()
     {
-        return $this->json($this->getUser());
+        return $this->json($this->getUser(), 200, [], $this->context);
     }
 
     /**

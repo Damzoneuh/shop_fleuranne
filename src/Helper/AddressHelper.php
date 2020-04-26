@@ -17,6 +17,8 @@ trait AddressHelper
         $address->setStreetComplement($payLoad['streetComplement']);
         $address->setType($payLoad['type']);
         $address->setZip($payLoad['zip']);
+        $address->setName($payLoad['name']);
+        $address->setLastName($payLoad['lastName']);
         if ($type == 'delivery'){
             $address->setDeliveryAddress($user);
         }

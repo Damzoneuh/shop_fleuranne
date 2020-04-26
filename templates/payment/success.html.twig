@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block  title %}{{ parent() }} Payment réussi{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row mt-5 mb-5">
+            <div class="col">
+                <div class="text-center text-grey">
+                    Votre commande à été enregistrée, Vous serez informé de son traitement et de son expédition par mail .
+                </div>
+                <div class="text-center">
+                    <a href="{{ path('index') }}" class="btn btn-group btn-success">Retour à la boutique</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>removeBasket()</script>
+{% endblock %}
