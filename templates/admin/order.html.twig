@@ -6,11 +6,22 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col mt-4 mb-4">
+        <div class="col-12 mt-4 mb-4">
             <div class="p-2 bg-grey-inherit text-pink">
                 <div class="text-center">
                     <h1>Commande : {{ order.invoice.payment.transactionUuid }}</h1>
-                    <h2>Mode d'envoi : {{ order.mode == 1 ? 'Collissimo' : 'Récuperé sur place' }}</h2>
+                    <h2 class="mt-3 mb-3">Mode d'envoi : {{ order.mode == 1 ? 'Collissimo' : 'Récuperé sur place' }}</h2>
+                    <h3 class="mt-3 mb-3">Status :
+                        {% if order.status == 'En attente' %}
+                            <span class="text-warning">{{ order.status }}</span>
+                        {% endif %}
+                        {% if order.status == 'En cours de préparation' %}
+                            <span class="text-warning">{{ order.status }}</span>
+                        {% endif %}
+                        {% if order.status == 'Prête' or order.status == 'Expédié' %}
+                            <span class="text-success">{{ order.status }}</span>
+                        {% endif %}
+                    </h3>
                 </div>
                 <table class="table table-striped mt-2 mb-2 text-pink">
                     <thead>
@@ -18,8 +29,6 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Référence</th>
                             <th scope="col">Quantité</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,25 +37,75 @@
                                <th>{{ item.name }}</th>
                                <td>{{ item.ref }}</td>
                                <td>{{ item.quantity }}</td>
-                               {% if order.status == 'En attente' %}
-                                   <td class="text-warning">{{ order.status }}</td>
-                               {% endif %}
-                               {% if order.status == 'En cours de préparation' %}
-                                   <td class="text-warning">{{ order.status }}</td>
-                               {% endif %}
-                               {% if order.status == 'Prête' or order.status == 'Expédié' %}
-                                   <td class="text-success">{{ order.status }}</td>
-                               {% endif %}
-                               {% if order.status != 'Prête' and order.status != 'Expédié' %}
-                                   <td>
-                                       {{ form_start(form) }}
-                                       {{ form_end(form) }}
-                                   </td>
-                               {% endif %}
                            </tr>
                        {% endfor %}
                     </tbody>
                 </table>
+                {% if order.status != 'Prête' and order.status != 'Expédié' %}
+                    <div class="text-center mt-5 mb-5">
+                        {{ form_start(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                {% endif %}
+                <div class="p-2 text-pink">
+                    <div class="text-center">
+                        <h1>Facture : {{ order.invoice.id }}</h1>
+                    </div>
+                    <table class="table table-striped mt-2 mb-2 text-pink">
+                        <thead>
+                            <tr>
+                                <th scope="col">Utilisateur</th>
+                                <th scope="col">Ref SystemPay</th>
+                                <th scope="col">uuid</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Montant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>{{ order.invoice.buyer.email }}</th>
+                                <td>{{ order.invoice.payment.transactionId }}</td>
+                                <td>{{ order.invoice.payment.transactionUuid }}</td>
+                                <td>{{ order.invoice.payment.date|date('d/m/Y') }}</td>
+                                <td>{{ order.invoice.payment.amount }} € </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col bg-pink-inherit text-grey mb-4">
+            <div class="p-2">
+                <h1 class="text-center">Adresse d'envoi</h1>
+                <div class="text-center">
+                    {{ deliveryAddress.name }} {{ deliveryAddress.lastName }}
+                </div>
+                <div class="text-center">
+                    {{ deliveryAddress.number }} {{ deliveryAddress.type }} {{ deliveryAddress.street }} {{ deliveryAddress.streetComplement }}
+                </div>
+                <div class="text-center">
+                    {{ deliveryAddress.zip }} {{ deliveryAddress.city }}
+                </div>
+                <div class="text-center">
+                    {{ deliveryAddress.country }}
+                </div>
+            </div>
+        </div>
+        <div class="col bg-grey-inherit text-pink mb-4">
+            <div class="p-2">
+                <h1 class="text-center">Adresse de facturation</h1>
+                <div class="text-center">
+                    {{ invoiceAddress.name }} {{ invoiceAddress.lastName }}
+                </div>
+                <div class="text-center">
+                    {{ invoiceAddress.number }} {{ invoiceAddress.type }} {{ invoiceAddress.street }} {{ invoiceAddress.streetComplement }}
+                </div>
+                <div class="text-center">
+                    {{ invoiceAddress.zip }} {{  invoiceAddress.city }}
+                </div>
+                <div class="text-center">
+                    {{ invoiceAddress.country }}
+                </div>
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Address;
 use App\Entity\Command;
 use App\Entity\Invoice;
 use App\Entity\Payment;
@@ -38,10 +39,11 @@ class AdminController extends AbstractController
 
     /**
      * @param Request $request
+     * @param MailerInterface $mailer
      * @param $id
      * @return Response
-     * @Route("/admin/order/{id}", name="admin_get_order")
      * @throws TransportExceptionInterface
+     * @Route("/admin/order/{id}", name="admin_get_order")
      */
     public function getOrder(Request $request, MailerInterface $mailer, $id){
         /** @var Command $order */
@@ -57,6 +59,9 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
 
+        $invoiceAddress = $this->getDoctrine()->getRepository(Address::class)->find($order->getInvoiceAddress());
+        $deliveryAddress = $this->getDoctrine()->getRepository(Address::class)->find($order->getDeliveryAddress());
+
         if ($form->isSubmitted() && $form->isValid()){
             $user = $order->getInvoice()->getBuyer();
             $nextStep = $this->getNextCommandStep($user, $order->getStatus(), $order->getMode());
@@ -69,6 +74,11 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin_get_order', ['id' => $id]);
         }
 
-        return $this->render('admin/order.html.twig', ['order' => $order, 'form' => $form->createView()]);
+        return $this->render('admin/order.html.twig', [
+            'order' => $order,
+            'form' => $form->createView(),
+            'deliveryAddress' => $deliveryAddress,
+            'invoiceAddress' => $invoiceAddress
+        ]);
     }
 }
