@@ -34,7 +34,7 @@ class ItemController extends AbstractController
     {
         $this->context = [
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-                return $object->getName();
+                return $object;
             },
         ];
 
