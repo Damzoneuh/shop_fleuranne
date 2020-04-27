@@ -76,6 +76,25 @@ export default class Footer extends Component{
                         <div className="col-12">
                             <div className="text-center text-grey h4 p-2"><h2>Contact</h2></div>
                         </div>
+                        <div className="col-md-6 col-sm-12 text-grey p-2 mb-4">
+                            <div className="d-flex flex-column align-items-center justify-content-around h-100">
+                                <a href="tel:0450098426" className="text-grey text-decoration-none"><h4><i className="fas fa-phone mr-4"></i> 04 50 09 84 26</h4></a>
+                                <a href="https://www.facebook.com/Institut-de-beaut%C3%A9-Fleuranne-250554305068430/" className="text-grey text-decoration-none" target="_blank">
+                                    <h4><i className="fab fa-facebook mr-4"></i>Suivez nous !</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div className="col-md-6 col-sm-12 text-grey p-2 mb-4">
+                            <div className="d-flex flex-column align-items-center justify-content-around h-100 mb-2">
+                                <h4 className="text-center text-grey mb-4">Horaires d'ouverture</h4>
+                                <h5 className="text-center text-grey">Lundi : 8h30 - 18h30</h5>
+                                <h5 className="text-center text-grey">Mardi : 8h30 - 18h30</h5>
+                                <h5 className="text-center text-grey">Mercredi : 8h30 - 13h00</h5>
+                                <h5 className="text-center text-grey">Jeudi : 8h30 - 18h30</h5>
+                                <h5 className="text-center text-grey">Vendredi : 8h30 - 18h30</h5>
+                                <h5 className="text-center text-grey">Samedi : 8h30 - 13h00</h5>
+                            </div>
+                        </div>
                         <div className="col-sm-12 col-lg-6">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11102.376714269722!2d6.143666!3d45.919423!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647a2d672a0bcf0e!2sInstitut+de+Beaut%C3%A9+Fleuranne!5e0!3m2!1sfr!2sfr!4v1549275358715"
