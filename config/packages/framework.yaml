@@ -9,7 +9,7 @@ framework:
         handler_id: session.handler.native_file
         cookie_secure: auto
         cookie_samesite: lax
-        cookie_domain: fleuranne.fr
+        cookie_domain: .fleuranne.fr
         save_path: '%env(SESSION_STORAGE)%'
 
 
