@@ -178,9 +178,9 @@ class ItemController extends AbstractController
      */
     public function getMarks($id = null){
         if ($id){
-            return $this->json($this->getDoctrine()->getRepository(Mark::class)->find($id));
+            return $this->json($this->getDoctrine()->getRepository(Mark::class)->find($id), 200, [], $this->context);
         }
-        return $this->json($this->getDoctrine()->getRepository(Mark::class)->findAll());
+        return $this->json($this->getDoctrine()->getRepository(Mark::class)->findAll(), 200, [], $this->context);
     }
 
     /**
@@ -214,9 +214,9 @@ class ItemController extends AbstractController
      */
     public function getChildCategories($id = null){
         if ($id){
-            return $this->json($this->getDoctrine()->getRepository(CategoryChild::class)->findOneSubCategory($id));
+            return $this->json($this->getDoctrine()->getRepository(CategoryChild::class)->findOneSubCategory($id), 200, [], $this->context);
         }
-        return $this->json($this->getDoctrine()->getRepository(CategoryChild::class)->getAllSubCategories());
+        return $this->json($this->getDoctrine()->getRepository(CategoryChild::class)->getAllSubCategories(), 200, [], $this->context);
     }
 
     /**
@@ -225,7 +225,7 @@ class ItemController extends AbstractController
      * @Route("/api/category/child/{id}", name="api_category_from_child", methods={"GET"})
      */
     public function getChildFromCategory($id){
-        return $this->json($this->getDoctrine()->getRepository(CategoryChild::class)->getSubFromOneCategory($id));
+        return $this->json($this->getDoctrine()->getRepository(CategoryChild::class)->getSubFromOneCategory($id), 200, [], $this->context);
     }
 
     /**
