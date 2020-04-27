@@ -95,6 +95,8 @@ export default class Footer extends Component{
                                 <h5 className="text-center text-grey">Samedi : 8h30 - 13h00</h5>
                             </div>
                         </div>
+
+
                         <div className="col-sm-12 col-lg-6">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11102.376714269722!2d6.143666!3d45.919423!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x647a2d672a0bcf0e!2sInstitut+de+Beaut%C3%A9+Fleuranne!5e0!3m2!1sfr!2sfr!4v1549275358715"
