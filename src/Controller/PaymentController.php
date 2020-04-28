@@ -93,7 +93,7 @@ class PaymentController extends AbstractController
        $em->remove($orderFromPayment);
        $em->flush();
 
-       $this->addFlash('success', 'Votre payment à bien été accépté .');
+       $this->addFlash('success', 'Votre paiment à bien été accépté .');
 
         $context = [
             'payload' => $paymentService->createTotalPayload($orderFromPaymentDecoded),
@@ -145,7 +145,7 @@ class PaymentController extends AbstractController
        $em->remove($orderFromPayment);
        $em->flush();
 
-       $this->addFlash('error', 'Une erreur est survenue lors du payment');
+       $this->addFlash('error', 'Une erreur est survenue lors du paiment');
 
        return $this->redirectToRoute('basket');
    }
@@ -170,7 +170,7 @@ class PaymentController extends AbstractController
        $em->remove($orderFromPayment);
        $em->flush();
 
-       $this->addFlash('error', 'Votre payment à été annulé');
+       $this->addFlash('error', 'Votre paiment à été annulé');
 
        return $this->redirectToRoute('basket');
    }
@@ -195,7 +195,7 @@ class PaymentController extends AbstractController
        $em->remove($orderFromPayment);
        $em->flush();
 
-       $this->addFlash('error', 'Le payment à été refusé par votre banque si le problème persiste, contactez votre établissmement banquaire .');
+       $this->addFlash('error', 'Le paiment à été refusé par votre banque si le problème persiste, contactez votre établissmement banquaire .');
        return $this->redirectToRoute('basket');
    }
 }
