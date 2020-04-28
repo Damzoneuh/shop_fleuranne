@@ -37,7 +37,7 @@ class PaymentService
      * @throws Exception
      */
     public function createPaymentPayload(User $user, $price, $appUrl, $tmpId){
-        $env = $this->parameter->get('APP_ENV') == 'dev' ? 'TEST' : 'PROD';
+        $env = $this->parameter->get('APP_ENV') == 'dev' ? 'TEST' : 'PRODUCTION';
         return $this->createPayload($user, $price,$env, $this->parameter->get('SHOP_ID'),
             self::createTransactionId(), self::createOrderId(), $this->parameter->get('SHOP_API_KEY'), $appUrl, $tmpId);
     }
