@@ -54,7 +54,7 @@ export default class ItemTable extends Component{
                             </tr>
                         </thead>
                         <tbody>
-                        {items && items.length > 0 && items.isArray() ?
+                        {items && items.length > 0 ?
                                 items.map(item => {
                                     return (
                                         <tr key={item.id}>
