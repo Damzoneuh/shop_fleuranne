@@ -29,7 +29,7 @@ class ItemRepository extends ServiceEntityRepository
 
     public function lastItems(){
         return $this->createQueryBuilder('i')
-            ->orderBy('i.createdAt', 'ASC')
+            ->orderBy('i.createdAt', 'DESC')
             ->where('i.prom IS NULL')
             ->setMaxResults(4)
             ->getQuery()
