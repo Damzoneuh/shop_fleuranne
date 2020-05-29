@@ -55,13 +55,16 @@ export default class Nav extends Component{
                 <div className="collapse navbar-collapse" id="navbarToggler">
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0 ">
                         <li className="nav-item">
-                            <a className="nav-link h4 text-grey" href="/">Accueil</a>
+                            <a className="nav-link text-grey" href="/">Accueil</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link text-grey" href="https://fleuranne.fr">L'institut</a>
                         </li>
                         {links && links.length > 0 ?
                                links.map(link => {
                                   return (
                                       <li className="nav-item dropdown">
-                                          <a className="nav-link dropdown-toggle h4 text-grey" href="#" id={'navbarDropdown-' + link.id}
+                                          <a className="nav-link dropdown-toggle text-grey" href="#" id={'navbarDropdown-' + link.id}
                                              role="button" data-toggle="dropdown" aria-haspopup="true"
                                              aria-expanded="false">
                                               {link.name}
@@ -80,13 +83,13 @@ export default class Nav extends Component{
                                })
                             : ''}
                         <li className="nav-item">
-                            <a className="nav-link h4 text-grey" href="#contact">Contact</a>
+                            <a className="nav-link text-grey" href="#contact">Contact</a>
                         </li>
                     </ul>
 
                     <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link h4 text-grey" href={el.dataset.user === "1" ? '/logout' : '/login'}>
+                            <a className="nav-link text-grey" href={el.dataset.user === "1" ? '/logout' : '/login'}>
                                 {el.dataset.user === "1" ? <div><i className="fas fa-lock text-grey"></i><span className="small text-grey ml-2">Déconnexion</span></div>
                                     :
                                     <div><i className="fas fa-lock-open text-grey"></i><span className="small text-grey ml-2">Connexion</span></div>
@@ -94,7 +97,7 @@ export default class Nav extends Component{
                             </a>
                         </li>
                         <li className="nav-item">
-                            {el.dataset.user === "1" ? <a href="/parameters" title="paramètres" className="nav-link h4"><i className="fas fa-cogs text-grey"></i></a> : ''}
+                            {el.dataset.user === "1" ? <a href="/parameters" title="paramètres" className="nav-link"><i className="fas fa-cogs text-grey"></i></a> : ''}
                         </li>
                     </ul>
                 </div>
